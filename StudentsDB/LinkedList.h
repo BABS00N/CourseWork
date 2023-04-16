@@ -21,7 +21,7 @@ public:
 
 	void pushFront(T _data);
 	void pushBack(T _data);
-	void insert(T _data, int index);
+	void insertByIndex(T _data, int index);
 	void deleteByIndex(int index);
 
 };

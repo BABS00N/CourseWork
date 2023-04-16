@@ -81,10 +81,11 @@ void LinkedList<T>::pushBack(T _data)
         current = current->next;
     }
     current->next = newItem;
+    countItem++;
 }
 
 template<typename T>
-void LinkedList<T>::insert(T _data, int index)
+void LinkedList<T>::insertByIndex(T _data, int index)
 {
     if (index == 0)
     {
@@ -93,6 +94,25 @@ void LinkedList<T>::insert(T _data, int index)
     else if (index == countItem - 1)
     {
         pushBack(_data);
+    }
+    else if (0 < index and index < countItem)
+    {
+        Node<T>* newItem = new Node<T>;
+        newItem->data = _data;
+        Node<T>* current = head;
+        Node<T>* temp;
+        for (int i = 0; i < index; i++)
+        {
+            current = current->next;
+        }
+        temp = current->next;
+        current->next = newItem;
+        newItem->next = temp;
+        countItem++;
+    }
+    else
+    {
+        cout << "Invalid index" << endl;
     }
 }
 
