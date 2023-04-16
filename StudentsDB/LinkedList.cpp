@@ -88,7 +88,11 @@ void LinkedList<T>::insert(T _data, int index)
 {
     if (index == 0)
     {
-        popFront(_data);
+        pushFront(_data);
+    }
+    else if (index == countItem - 1)
+    {
+        pushBack(_data);
     }
 }
 
