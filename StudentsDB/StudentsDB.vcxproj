@@ -153,6 +153,7 @@
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentsDB.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="SubjectList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="RecordBook.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="SubjectList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

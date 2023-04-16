@@ -5,12 +5,12 @@ using namespace std;
 class Subject
 {
 private:
-	string subjectName;
-	string subjectType;
-	string subjectMark;
+	char subjectName[30];
+	char subjectType[30];
+	char subjectMark[30];
 public:
 	Subject();
-	Subject(string subjectName, string subjectType, string subjectMark);
+	Subject(char _subjectName[30], char _subjectType[30], char _subjectMark[30]);
 
 	~Subject();
 };
