@@ -33,7 +33,7 @@
     <ClCompile Include="LinkedList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="SubjectList.cpp">
+    <ClCompile Include="EditData.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,10 @@
     <ClInclude Include="LinkedList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SubjectList.h">
+    <ClInclude Include="SessionList.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="EditData.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
