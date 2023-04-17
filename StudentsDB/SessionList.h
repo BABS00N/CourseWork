@@ -1,4 +1,6 @@
 #pragma once
+
+
 #include "Subject.h"
 #include "LinkedList.h"
 class SessionList

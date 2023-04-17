@@ -19,9 +19,10 @@ private:
 	enum class Sex :char {male='Ì', female='Æ' } sex;
 	RecordBook recordBook;
 public:
-	Student(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], char _sex, RecordBook _recordBook);
+	Student(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook);
 	Student();
 	~Student();
 
-	void setStudent(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], char _sex, RecordBook _recordBook);
+	void setStudent(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook);
+	char* getFullName();
 };

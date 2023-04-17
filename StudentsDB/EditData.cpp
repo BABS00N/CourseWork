@@ -61,3 +61,45 @@ bool EditData::isSpecCharacter(char ch)
 		return true;
 	return false;
 }
+
+string EditData::getData(editType _type)
+{
+	cout << label << endl << data;
+	char ch = 0;
+	while (ch != 13)//enter
+	{
+		ch = _getch();
+		if (ch == 0)
+		{
+			if (data.length() > 0)
+			{
+				data.pop_back();
+				system("cls");
+				cout << label << endl << data;
+			}
+			continue;
+		}
+		if (_type == editType::onlyDigit)
+		{
+			if (isDigit(ch))
+			{
+				cout << ch;
+				data += ch;
+			}
+		}
+		if (_type == editType::olnyLetter)
+		{
+			if (isLetter(ch))
+			{
+				cout << ch;
+				data += ch;
+			}
+		}
+		if (_type == editType::all)
+		{
+			cout << ch;
+			data += ch;
+		}
+	}
+	return data;
+}

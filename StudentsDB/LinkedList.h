@@ -29,7 +29,7 @@ template<typename T>
 LinkedList<T>::LinkedList()
 {
     countItem = 0;
-    //head = nullptr;
+    head = nullptr;
 }
 
 template<typename T>
