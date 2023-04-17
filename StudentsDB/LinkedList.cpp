@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+/*#include "LinkedList.h"
 
 template<typename T>
 LinkedList<T>::LinkedList()
@@ -140,4 +140,4 @@ void LinkedList<T>::deleteByIndex(int index)
     {
         cout << "Invalid index" << endl;
     }
-}
+}*/

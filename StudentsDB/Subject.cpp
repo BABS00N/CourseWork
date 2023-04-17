@@ -3,7 +3,7 @@ Subject::Subject()
 {
 	strcpy_s(subjectName, "Предмет");
 	strcpy_s(subjectType, "Тип");
-	strcpy_s(subjectMark, "Тип");
+	strcpy_s(subjectMark, "Оценка");
 }
 Subject::Subject(char _subjectName[30], char _subjectType[30], char _subjectMark[30])
 {
