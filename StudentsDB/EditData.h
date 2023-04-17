@@ -15,6 +15,8 @@ private:
 public:
 	enum class editType : char { onlyDigit, olnyLetter, all };
 	
+	void setLabel(string _label);
+
 	EditData();
 	~EditData();
 	
@@ -25,6 +27,6 @@ public:
 	bool isSpecCharacter(char ch);
 
 	string getData(editType _type);
-	string getData(editType _type);
-	string getData(editType _type);
+	//string getData(editType _type);
+	//string getData(editType _type);
 };

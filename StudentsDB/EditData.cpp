@@ -1,5 +1,13 @@
 #include "EditData.h"
 
+void EditData::setLabel(string _label)
+{
+	if (_label.length() > 1)
+		this->label = _label;
+	else
+		label = "";
+}
+
 EditData::EditData()
 {
 	label = "";
