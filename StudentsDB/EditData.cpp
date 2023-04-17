@@ -1,5 +1,15 @@
 #include "EditData.h"
 
+EditData::EditData()
+{
+	label = "";
+	data = "";
+}
+
+EditData::~EditData()
+{
+}
+
 bool EditData::isDigit(char ch)
 {
 	if (48 <= ch and ch <= 57)
@@ -8,9 +18,16 @@ bool EditData::isDigit(char ch)
 		return false;
 }
 
-bool EditData::isStringDigit()
+bool EditData::isDigitString(string _str)
 {
-	return false;
+	for (int i = 0; i < _str.length(); i++)
+	{
+		if (not isDigit(_str[i]))
+			return false;
+	}
+	if (_str.length() == 0)
+		return false;
+	return true;
 }
 
 bool EditData::isLetter(char ch)
@@ -19,7 +36,7 @@ bool EditData::isLetter(char ch)
 		return true;
 	if (97 <= ch and ch <= 122)
 		return true;
-	if (-200 <= ch and ch <= -1)
+	if (192 <= ch and ch <= 255)
 		return true;
 	return false;
 }
