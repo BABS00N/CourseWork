@@ -14,11 +14,6 @@ Date::Date(unsigned short _day, unsigned short _month, unsigned short _year)
 	setDate(_day, _month, _year);
 }
 
-Date::~Date()
-{
-
-}
-
 void Date::setDate(unsigned short _day, unsigned short _month, unsigned short _year)
 {
 	this->day = _day;
@@ -36,4 +31,19 @@ void Date::getDate(unsigned short& _day, unsigned short& _month, unsigned short&
 	_day = this->day;
 	_month = this->month;
 	_year = this->year;
+}
+
+unsigned short Date::getDay()
+{
+	return day;
+}
+
+unsigned short Date::getMonth()
+{
+	return month;
+}
+
+unsigned short Date::getYear()
+{
+	return year;
 }

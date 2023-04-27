@@ -1,28 +1,27 @@
 #pragma once
 #include "Date.h"
 #include "RecordBook.h"
+#include "Person.h"
 #include <iostream>
 using namespace std;
 
-class Student
+enum class Sex :char { male = 'Ì', female = 'Æ' };
+enum class markType : char { Fail, Pass, Excellent, Good, Satisfactory, Bad };
+
+class Student : public Person
 {
-private:
-	char name[30];
-	char surname[30];
-	char patronymic[30];
-	Date date;
+protected:
 	unsigned short admissionYear;
-	char faculty[8];
-	char department[8];
-	char group[11];
-	char recordBookNumber[20];
-	enum class Sex :char {male='Ì', female='Æ' } sex;
+	string faculty;
+	string department;
+	string group;
+	string recordBookNumber;
 	RecordBook recordBook;
 public:
-	Student(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook);
+	Student(string _name, string _surname, string _patronymic, Date _date, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook);
 	Student();
 	~Student();
 
-	void setStudent(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook);
-	char* getFullName();
+	void setStudent(string _name, string _surname, string _patronymic, Date _date, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook);
+	string* getFullName();
 };

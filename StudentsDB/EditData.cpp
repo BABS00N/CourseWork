@@ -14,10 +14,6 @@ EditData::EditData()
 	data = "";
 }
 
-EditData::~EditData()
-{
-}
-
 bool EditData::isDigit(char ch)
 {
 	if (48 <= ch and ch <= 57)

@@ -10,10 +10,13 @@ private:
 public:
 	Date();
 	Date(unsigned short _day, unsigned short _month, unsigned short _year);
-	~Date();
 
 	void setDate(unsigned short _day, unsigned short _month, unsigned short _year);
 	void setDate(Date _date);
 
 	void getDate(unsigned short& _day, unsigned short& _month, unsigned short& _year);
+
+	unsigned short getDay();
+	unsigned short getMonth();
+	unsigned short getYear();
 };

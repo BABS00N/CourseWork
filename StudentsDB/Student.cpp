@@ -1,40 +1,40 @@
 #include "Student.h"
 Student::Student()
 {
-	strcpy_s(name , "Имя");
-	strcpy_s(surname , "Фамилия");
-	strcpy_s(patronymic , "Отчество");
-	date = { 1,1,2023 };
+	name = "Имя";
+	surname = "Фамилия";
+	patronymic = "Отчество";
+	birthDate = { 1,1,2023 };
 	admissionYear = 2022;
-	strcpy_s(faculty , "ИКБ");
-	strcpy_s(department , "КБ-1");
-	strcpy_s(group , "БББО-05-22");
-	strcpy_s(recordBookNumber , "АА88-228");
+	faculty = "ИКБ";
+	department = "КБ-1";
+	group = "БББО-05-22";
+	recordBookNumber = "АА88-228";
 	sex = Sex::male;
 	recordBook;
 };
 
-Student::Student(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook)
+Student::Student(string _name, string _surname, string _patronymic, Date _birthDate, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook)
 {
-	setStudent(_name, _surname, _patronymic, _date, _admissionYear, _faculty, _department, _group, _recordBookNumber, _sex, _recordBook);
+	setStudent(_name, _surname, _patronymic, _birthDate, _admissionYear, _faculty, _department, _group, _recordBookNumber, _sex, _recordBook);
 };
 
-void Student::setStudent(char _name[30], char _surname[30], char _patronymic[30], Date _date, unsigned short _admissionYear, char _faculty[8], char _department[8], char _group[11], char _recordBookNumber[20], Sex _sex, RecordBook _recordBook)
+void Student::setStudent(string _name, string _surname, string _patronymic, Date _birthDate, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook)
 {
-	strcpy_s(name, _name);
-	strcpy_s(surname, _surname);
-	strcpy_s(patronymic, _patronymic);
-	date = _date;
+	name= _name;
+	surname= _surname;
+	patronymic= _patronymic;
+	birthDate = _birthDate;
 	admissionYear = _admissionYear;
-	strcpy_s(faculty, _faculty);
-	strcpy_s(department, _department);
-	strcpy_s(group, _group);
-	strcpy_s(recordBookNumber, _recordBookNumber);
+	faculty= _faculty;
+	department= _department;
+	group= _group;
+	recordBookNumber= _recordBookNumber;
 	sex = _sex;
 	recordBook = _recordBook;
 }
 
-char* Student::getFullName()
+string* Student::getFullName()
 {
 	return name, surname, patronymic;
 }
