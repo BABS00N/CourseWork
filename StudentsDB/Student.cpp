@@ -1,24 +1,24 @@
 #include "Student.h"
 Student::Student()
 {
-	name = "Имя";
-	surname = "Фамилия";
-	patronymic = "Отчество";
+	fio.name = "Имя";
+	fio.surname = "Фамилия";
+	fio.patronymic = "Отчество";
 	birthDate = { 1,1,2023 };
 	admissionYear = 2022;
 	faculty = "ИКБ";
 	department = "КБ-1";
 	group = "БББО-05-22";
 	recordBookNumber = "АА88-228";
-	sex = Sex::male;
+	sex = 'Т';
 	recordBook;
 };
 
-Student::Student(string _name, string _surname, string _patronymic, Date _birthDate, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook)
-{
-	setStudent(_name, _surname, _patronymic, _birthDate, _admissionYear, _faculty, _department, _group, _recordBookNumber, _sex, _recordBook);
-};
-
+//Student::Student(string _name, string _surname, string _patronymic, Date _birthDate, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook)
+//{
+	
+//};
+/*
 void Student::setStudent(string _name, string _surname, string _patronymic, Date _birthDate, unsigned short _admissionYear, string _faculty, string _department, string _group, string _recordBookNumber, Sex _sex, RecordBook _recordBook)
 {
 	name= _name;
@@ -32,7 +32,7 @@ void Student::setStudent(string _name, string _surname, string _patronymic, Date
 	recordBookNumber= _recordBookNumber;
 	sex = _sex;
 	recordBook = _recordBook;
-}
+}*/
 
 string* Student::getFullName()
 {

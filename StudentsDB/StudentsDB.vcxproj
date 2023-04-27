@@ -150,7 +150,6 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="EditData.cpp" />
     <ClCompile Include="LinkedList.cpp" />
-    <ClCompile Include="Person.cpp" />
     <ClCompile Include="RecordBook.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentsDB.cpp" />
