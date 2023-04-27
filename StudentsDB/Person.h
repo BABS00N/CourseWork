@@ -8,10 +8,12 @@ struct FIO
 	string name;
 	string surname;
 	string patronymic;
-private:
+//protected:
 	FIO()
 	{
-
+		name = "name";
+		surname = "surname";
+		patronymic = "patronymic";
 	};
 };
 
@@ -22,6 +24,8 @@ protected:
 	Date birthDate;
 	char sex;
 public:
+	Person() { birthDate = { 1,1,2023 }; sex = 'T'; };
+
 	string getName() { return fio.name; }
 	string getSurame() { return fio.surname; }
 	string getPatronymic() { return fio.patronymic; }

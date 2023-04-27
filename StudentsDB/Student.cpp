@@ -34,10 +34,6 @@ void Student::setStudent(string _name, string _surname, string _patronymic, Date
 	recordBook = _recordBook;
 }*/
 
-string* Student::getFullName()
-{
-	return name, surname, patronymic;
-}
 
 
 
