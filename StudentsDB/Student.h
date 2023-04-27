@@ -5,8 +5,7 @@
 #include <iostream>
 using namespace std;
 
-enum class Sex :char { male = 'Ì', female = 'Æ' };
-enum class markType : char { Fail, Pass, Excellent, Good, Satisfactory, Bad };
+//enum class markType : char { Fail, Pass, Excellent, Good, Satisfactory, Bad };
 
 class Student : public Person
 {
@@ -23,4 +22,14 @@ public:
     ~Student();
 
 	int getAdmissionYear() { return admissionYear; }
+	string getFaculty() { return faculty; }
+	string getDepartment() { return department; }
+	string getGroup() { return group; }
+	string getRecordBookNumber() { return recordBookNumber; }
+
+	void setfAdmissionYear(int _year) { admissionYear = _year; }
+	void setFaculty(string _faculty) { faculty = _faculty; }
+	void setDepartment(string _department) { department = _department; }
+	void setGroup(string _group) { group = _group; }
+	void setRecordBookNumber(string _recordBookNumber) { recordBookNumber = recordBookNumber; }
 };
