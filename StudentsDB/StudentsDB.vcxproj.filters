@@ -62,9 +62,6 @@
     <ClInclude Include="Menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ClassList.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Session.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

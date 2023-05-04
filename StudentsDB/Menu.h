@@ -12,7 +12,7 @@ class ClassMenu
 {
 private:
 	string upTitle;
-	List items; 
+	List<string> items;
 	string downTitle;
 public:
 
@@ -20,12 +20,12 @@ public:
 		upTitle = move(_upTitle);
 	}
 
-	ClassMenu() : ClassMenu("Ãëàâíîå ìåíþ") {
-		downTitle = "Âûáåðèòå ïóíêò èç ìåíþ (÷èñëî): ";
+	ClassMenu() : ClassMenu("Главное меню") {
+		downTitle = "Выберите пункт из меню (число): ";
 	}
 
 	void addMenuItem(string _item) {
-		items.push_back(_item);
+		items.pushBack(_item);
 	}
 	void draw() {
 		system("cls");
@@ -36,11 +36,10 @@ public:
 	int run() {
 		draw();
 		EditData* cl = new EditData();
-		cl->setLabel("Ââåäèòå ÷èñëî");
-		int min = 0, max = items.getCount();
+		cl->setLabel("Введите число");
+		int min = 0, max = items.getSize();
 		int selectItem = cl->getData(editType::onlyDigit, min, max);
 		delete cl;
 		return selectItem;
 	}
-
 };

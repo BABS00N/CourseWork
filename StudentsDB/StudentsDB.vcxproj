@@ -155,7 +155,6 @@
     <ClCompile Include="StudentsDB.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassList.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="EditData.h" />
     <ClInclude Include="Session.h" />

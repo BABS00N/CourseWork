@@ -2,7 +2,8 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
-//#include <Windows.h>
+#include <conio.h>
+#include <Windows.h>
 using namespace std;
 
 enum class editType : char { onlyDigit, onlyLetter, all };

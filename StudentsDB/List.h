@@ -17,12 +17,14 @@ public:
 	void popFront();
 	void popBack();
 
-	int size();
+	int getSize();
 
 	void pushFront(T _data);
 	void pushBack(T _data);
 	void insertByIndex(T _data, int index);
 	void deleteByIndex(int index);
+    void printItems4Menu();
+    
 };
 
 template<typename T>
@@ -80,7 +82,7 @@ void List<T>::popBack()
 }
 
 template<typename T>
-int List<T>::size()
+int List<T>::getSize()
 {
     return countItem;
 }
@@ -164,5 +166,17 @@ void List<T>::deleteByIndex(int index)
     else
     {
         cout << "Invalid index" << endl;
+    }
+}
+
+template<typename T>
+inline void List<T>::printItems4Menu()
+{
+    struct Node<T>* current = myHead;
+    int i = 0;
+    while (current != NULL) {
+        cout << i << ". " << current->data << endl;
+        i++;
+        current = current->next;
     }
 }
