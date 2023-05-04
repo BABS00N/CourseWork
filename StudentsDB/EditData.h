@@ -5,7 +5,7 @@
 //#include <Windows.h>
 using namespace std;
 
-enum class Type : char { onlyDigit, onlyLetter, all };
+enum class editType : char { onlyDigit, onlyLetter, all };
 
 class EditData
 {
@@ -19,10 +19,12 @@ private:
 	bool isSpace(char ch);
 	bool isSpecCharacter(char ch);
 public:
-	enum class editType : char { onlyDigit, olnyLetter, all };
+	//enum class editType : char { onlyDigit, olnyLetter, all };
 	
 	EditData();
 
 	void setLabel(string _label);
-	string getData(editType _type);
+	string getData(enum class editType _type);
+	int getData(enum class editType et, int min, int max);
+
 };

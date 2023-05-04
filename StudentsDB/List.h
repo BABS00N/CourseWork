@@ -4,14 +4,14 @@
 using namespace std;
 
 template<typename T>
-class LinkedList
+class List
 {
 private:
 	Node<T>* head;
 	int countItem;
 public:
-	LinkedList();
-	~LinkedList();
+	List();
+	~List();
 
 	void clear();
 	void popFront();
@@ -26,14 +26,14 @@ public:
 };
 
 template<typename T>
-LinkedList<T>::LinkedList()
+List<T>::List()
 {
     countItem = 0;
     head = nullptr;
 }
 
 template<typename T>
-LinkedList<T>::~LinkedList()
+List<T>::~List()
 {
     Node<T>* current = head;
     Node<T>* temp;
@@ -46,7 +46,7 @@ LinkedList<T>::~LinkedList()
 }
 
 template<typename T>
-void LinkedList<T>::clear()
+void List<T>::clear()
 {
     Node<T>* current = head;
     Node<T>* temp;
@@ -59,7 +59,7 @@ void LinkedList<T>::clear()
 }
 
 template<typename T>
-void LinkedList<T>::popFront()
+void List<T>::popFront()
 {
     Node<T>* temp = head;
     head = head->next;
@@ -68,7 +68,7 @@ void LinkedList<T>::popFront()
 }
 
 template<typename T>
-void LinkedList<T>::popBack()
+void List<T>::popBack()
 {
     Node<T>* current = head;
     for (int i = 0; i < countItem; i++)
@@ -80,13 +80,13 @@ void LinkedList<T>::popBack()
 }
 
 template<typename T>
-int LinkedList<T>::size()
+int List<T>::size()
 {
     return countItem;
 }
 
 template<typename T>
-void LinkedList<T>::pushFront(T _data)
+void List<T>::pushFront(T _data)
 {
     Node<T>* newItem = new Node<T>;
     newItem->data = _data;
@@ -96,7 +96,7 @@ void LinkedList<T>::pushFront(T _data)
 }
 
 template<typename T>
-void LinkedList<T>::pushBack(T _data)
+void List<T>::pushBack(T _data)
 {
     Node<T>* newItem = new Node<T>;
     newItem->data = _data;
@@ -110,7 +110,7 @@ void LinkedList<T>::pushBack(T _data)
 }
 
 template<typename T>
-void LinkedList<T>::insertByIndex(T _data, int index)
+void List<T>::insertByIndex(T _data, int index)
 {
     if (index == 0)
     {
@@ -142,7 +142,7 @@ void LinkedList<T>::insertByIndex(T _data, int index)
 }
 
 template<typename T>
-void LinkedList<T>::deleteByIndex(int index)
+void List<T>::deleteByIndex(int index)
 {
     if (index == 0)
     {

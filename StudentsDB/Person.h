@@ -3,46 +3,35 @@
 #include <string.h>
 #include "Date.h"
 
-struct FIO
-{
-	string name;
-	string surname;
-	string patronymic;
-//protected:
-	FIO()
-	{
-		name = "name";
-		surname = "surname";
-		patronymic = "patronymic";
-	};
-};
+enum class Sex : char { male='Ì', female='Æ' };
 
 class Person
 {
 protected:
-	FIO fio;
+	char surname[30];
+	char name[30];
+	char patronymic[30];
 	Date birthDate;
-	char sex;
+	Sex sex;
 public:
-	Person() { birthDate = { 1,1,2023 }; sex = 'T'; };
-
-	string getName() { return fio.name; }
-	string getSurame() { return fio.surname; }
-	string getPatronymic() { return fio.patronymic; }
+	string getName() { return name; }
+	string getSurame() { return surname; }
+	string getPatronymic() { return patronymic; }
 	Date getBirthDate() { return birthDate; }
-	char getSex() { return sex; }
+	Sex getSex() { return sex; }
 
-	void setFIO(string _name, string _surname, string _patronymic)
+	void setPerson(char* _name, char* _surname, char* _patronymic, Date _birthDate, Sex _sex)
 	{
 		setName(_name);
-		setSurname(_surname);
+		setSurname(_surname) ;
 		setPatronymic(_patronymic);
+		setBirthDate(_birthDate);
+		setSex(_sex);
 	}
-	void setFIO(FIO* _fio) { setFIO(_fio->name, _fio->surname, _fio->patronymic); }
-	void setName(string _name) { fio.name = _name; }
-	void setSurname(string _surname) { fio.name = _surname; }
-	void setPatronymic(string _patronymic) { fio.patronymic = _patronymic; }
+	void setName(char* _name) { strcpy(name,_name); }
+	void setSurname(char* _surname) { strcpy(name,_surname); }
+	void setPatronymic(char* _patronymic) { strcpy(patronymic,_patronymic); }
 	void setBirthDate(Date _birthDate) { birthDate.setDate(_birthDate); }
-	void setSex(char _sex) { sex = _sex; }
+	void setSex(Sex _sex) { sex = _sex; }
 };
 

@@ -149,22 +149,23 @@
   <ItemGroup>
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="EditData.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="RecordBook.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentsDB.cpp" />
-    <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassList.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="EditData.h" />
-    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="RecordBook.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="Subject.h" />
-    <ClInclude Include="SessionList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

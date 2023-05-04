@@ -1,4 +1,4 @@
-#include "EditData.h"
+﻿#include "EditData.h"
 
 void EditData::setLabel(string _label)
 {
@@ -91,7 +91,7 @@ string EditData::getData(editType _type)
 				data += ch;
 			}
 		}
-		if (_type == editType::olnyLetter)
+		if (_type == editType::onlyLetter)
 		{
 			if (isLetter(ch))
 			{
@@ -106,4 +106,20 @@ string EditData::getData(editType _type)
 		}
 	}
 	return data;
+}
+
+int EditData::getData(enum class editType et, int min, int max) {
+	if (et == editType::onlyDigit) {
+		getData(et);
+		int num = max + 1;
+		if (isDigitString(data))
+			num = atoi(data.c_str());
+		if (not (num >= min and num <= max)) {
+			cout << endl << "Îøèáêà: ×èñëî êîòîðîå âû ââåëè: " << num << " Âûõîäèò èç äèàïàçîíà (" << min << "; " << max << ") ";
+			getData(et, min, max);
+		}
+		if (isDigitString(data))
+			num = atoi(data.c_str());
+		return num;
+	}
 }

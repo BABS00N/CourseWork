@@ -2,16 +2,11 @@
 #include <iostream>
 using namespace std;
 
-class Subject
-{
-private:
-	char subjectName[30];
-	char subjectType[30];
-	char subjectMark[30];
-public:
-	Subject();
-	Subject(char _subjectName[30], char _subjectType[30], char _subjectMark[30]);
+enum class markType : char { Fail, Pass, Excellent5, Good4, Satisfactory3, Bad2 };
 
-	~Subject();
+struct Subject
+{
+	char name[50];
+	markType mark;
 };
 
