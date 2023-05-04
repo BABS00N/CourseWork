@@ -8,7 +8,7 @@
 #include "List.h"
 using namespace std;
 
-class ClassMenu
+class Menu
 {
 private:
 	string upTitle;
@@ -16,11 +16,11 @@ private:
 	string downTitle;
 public:
 
-	ClassMenu(string _upTitle) {
+	Menu(string _upTitle) {
 		upTitle = move(_upTitle);
 	}
 
-	ClassMenu() : ClassMenu("Главное меню") {
+	Menu() : Menu("Главное меню") {
 		downTitle = "Выберите пункт из меню (число): ";
 	}
 

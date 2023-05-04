@@ -1,5 +1,11 @@
 ﻿#include "EditData.h"
 
+void EditData::clear(string _data)
+{
+	system("cls");
+	data = _data;
+}
+
 void EditData::setLabel(string _label)
 {
 	if (_label.length() > 1)
@@ -66,6 +72,36 @@ bool EditData::isSpecCharacter(char ch)
 	return false;
 }
 
+bool EditData::isDateString(string _str)
+{
+	int fix = 0;
+	for (int i = 0; i <3;i++)
+	{
+		if (i < 2)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				if (not isDigit(_str[i * 3 + j + fix]))
+					return false;
+			}
+			if (not(_str[i + 2] == 46) and i != 2)
+				return false;
+			fix--;
+		}
+		else
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (not isDigit(_str[i * 3 + j + fix]))
+					return false;
+			}
+		}
+	}
+	if (_str.length() == 0)
+		return false;
+	return true;
+}
+
 string EditData::getData(editType _type)
 {
 	cout << label << endl << data;
@@ -108,18 +144,30 @@ string EditData::getData(editType _type)
 	return data;
 }
 
-int EditData::getData(enum class editType et, int min, int max) {
+int EditData::getData(editType et, int min, int max) {
 	if (et == editType::onlyDigit) {
 		getData(et);
 		int num = max + 1;
 		if (isDigitString(data))
 			num = atoi(data.c_str());
 		if (not (num >= min and num <= max)) {
-			cout << endl << "Îøèáêà: ×èñëî êîòîðîå âû ââåëè: " << num << " Âûõîäèò èç äèàïàçîíà (" << min << "; " << max << ") ";
+			cout << endl << "Ошибка: Число которое вы ввели: " << num << " Выходит из диапазона (" << min << "; " << max << ") ";
 			getData(et, min, max);
 		}
 		if (isDigitString(data))
 			num = atoi(data.c_str());
 		return num;
+	}
+}
+
+string EditData::getData(editType et, int len)
+{
+	if (et == editType::onlyLetter or et == editType::all) {
+		getData(et);
+		if (data.length() > len) {
+			cout << endl << "Ошибка: Длина строки больше чем допускается: " << data.length() << " Разрешено: " << len << " ";
+			getData(et, len);
+		}
+		return data;
 	}
 }

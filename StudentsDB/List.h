@@ -172,7 +172,7 @@ void List<T>::deleteByIndex(int index)
 template<typename T>
 inline void List<T>::printItems4Menu()
 {
-    struct Node<T>* current = myHead;
+    struct Node<T>* current = head;
     int i = 0;
     while (current != NULL) {
         cout << i << ". " << current->data << endl;

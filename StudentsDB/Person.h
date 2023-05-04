@@ -28,9 +28,9 @@ public:
 		setBirthDate(_birthDate);
 		setSex(_sex);
 	}
-	void setName(char* _name) { strcpy(name,_name); }
-	void setSurname(char* _surname) { strcpy(name,_surname); }
-	void setPatronymic(char* _patronymic) { strcpy(patronymic,_patronymic); }
+	void setName(char* _name) { strcpy_s(name,_name); }
+	void setSurname(char* _surname) { strcpy_s(name,_surname); }
+	void setPatronymic(char* _patronymic) { strcpy_s(patronymic,_patronymic); }
 	void setBirthDate(Date _birthDate) { birthDate.setDate(_birthDate); }
 	void setSex(Sex _sex) { sex = _sex; }
 };

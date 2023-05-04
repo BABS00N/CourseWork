@@ -19,13 +19,16 @@ private:
 	bool isLetter(char ch);
 	bool isSpace(char ch);
 	bool isSpecCharacter(char ch);
+	bool isDateString(string _str);
 public:
 	//enum class editType : char { onlyDigit, olnyLetter, all };
 	
 	EditData();
 
+	void clear(string _data = "");
 	void setLabel(string _label);
-	string getData(enum class editType _type);
-	int getData(enum class editType et, int min, int max);
+	string getData(editType _type);
+	int getData(editType et, int min, int max);
+	string getData(editType et, int len);
 
 };

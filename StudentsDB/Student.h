@@ -1,16 +1,18 @@
 ﻿#pragma once
-#include "Date.h"
 #include "RecordBook.h"
 #include "Person.h"
 #include <iostream>
 #include <string>
 #include "Subject.h"
 #include <Windows.h>
+#include "Menu.h"
+#include <stdio.h>
 using namespace std;
 
 class Student : protected Person
 {
-
+private:
+	EditData* edit;
 protected:
 	int admissionYear;
 	char faculty[30];
@@ -36,4 +38,5 @@ public:
 
 	void setDefaultData();
 	void printInfo();
+	void editStudent();
 };
