@@ -33,6 +33,15 @@ void Date::getDate(unsigned short& _day, unsigned short& _month, unsigned short&
 	_year = this->year;
 }
 
+string Date::getDateString()
+{
+	stringstream dateString;
+	isZeroNeedPrint(day, dateString); dateString << '.';
+	isZeroNeedPrint(month, dateString); dateString << '.';
+	isZeroNeedPrint(year, dateString);
+	return dateString.str();
+}
+
 unsigned short Date::getDay()
 {
 	return day;

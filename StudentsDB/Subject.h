@@ -8,5 +8,6 @@ struct Subject
 {
 	char name[50];
 	markType mark;
+	bool isEmpty;
 };
 

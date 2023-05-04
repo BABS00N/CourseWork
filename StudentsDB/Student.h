@@ -4,6 +4,7 @@
 #include "Person.h"
 #include <iostream>
 #include <string>
+#include "Subject.h"
 #include <Windows.h>
 using namespace std;
 
@@ -16,7 +17,7 @@ protected:
 	char department[30];
 	char group[10];
 	char recordBookNumber[9];
-	RecordBook recordBook[9][10];
+	Subject recordBook[9][10];
 public:
 	Student();
 	~Student();
@@ -33,21 +34,6 @@ public:
 	void setGroup(char* _group) { strcpy_s(group,_group); }
 	void setRecordBookNumber(char* _recordBookNumber) { strcpy_s(recordBookNumber, recordBookNumber); }
 
-	void setDefaultData()
-	{
-		strncpy_s(surname, "Иванов", 30);
-		strncpy_s(name, "Иван", 30);
-		strncpy_s(patronymic, "Иванович", 30);
-		strncpy_s(faculty, "ИКБ", 30);
-		strncpy_s(department, "Èíôîðìàöèîííàÿ áåçîïàñíîñòü", 30);
-		strncpy_s(group, "БББО-05-22", 10);
-		strncpy_s(recordBookNumber, "123456789", 9);
-		birthDate.setDate(01,01,2004);
-		sex = Sex::male;
-		admissionYear = 2022;
-		for (int i = 0; i < 9; i++)
-			for (int j = 0; j < 10; j++) {
-				recordBook[i][j].isEmpty = true;
-			}
-	}
+	void setDefaultData();
+	void printInfo();
 };
