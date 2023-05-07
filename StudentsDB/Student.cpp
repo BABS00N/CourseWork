@@ -1,4 +1,7 @@
 ﻿#include "Student.h"
+
+string str;
+
 Student::Student()
 {
 	fileName = "database.bin";
@@ -64,7 +67,7 @@ void Student::setDefaultData2()
 
 void Student::setSurname()
 {
-	string str;
+	
 	edit->clear(SN.surname); edit->setLabel("Введите фамилию: ");
 	str = edit->getData(editType::onlyLetter, 30).c_str();
 	strncpy_s(SN.surname, str.c_str(), str.size());
@@ -72,7 +75,7 @@ void Student::setSurname()
 
 void Student::setName()
 {
-	string str;
+	
 	edit->clear(SN.name); edit->setLabel("Введите имя: ");
 	str = edit->getData(editType::onlyLetter, 30).c_str();
 	strncpy_s(SN.name, str.c_str(), str.size());
@@ -80,7 +83,7 @@ void Student::setName()
 
 void Student::setPatronymic()
 {
-	string str;
+	
 	edit->clear(SN.patronymic); edit->setLabel("Введите отчество: ");
 	str = edit->getData(editType::onlyLetter, 30).c_str();
 	strncpy_s(SN.patronymic, str.c_str(), str.size());
@@ -88,7 +91,7 @@ void Student::setPatronymic()
 
 void Student::setBirthDate()
 {
-	string str;
+	
 	edit->clear(SN.birthDate);
 	edit->setLabel("Введите дату рождения: ");
 	str = edit->getData(editType::all, 15);
@@ -102,14 +105,17 @@ void Student::setSex(string header)
 	sexMenu->addMenuItem("Мужской");
 	sexMenu->addMenuItem("Женский");
 	int sexItem = -1;
-	sexItem = sexMenu->run();
-	if (sexItem == 1) { SN.sex = Sex::male; sexItem = 0; }
-	if (sexItem == 2) { SN.sex = Sex::female; sexItem = 0; }
+	while (sexItem != 0) {
+		sexItem = sexMenu->run();
+		if (sexItem == 1) { SN.sex = Sex::male; sexItem = 0; }
+		if (sexItem == 2) { SN.sex = Sex::female; sexItem = 0; }
+	}
+	delete sexMenu;
 }
 
 void Student::setfAdmissionYear()
 {
-	string str;
+	
 	edit->clear(to_string(SN.admissionYear));
 	edit->setLabel("Введите год начала обучения: ");
 	SN.admissionYear = edit->getData(editType::onlyDigit, 1940, 2022);
@@ -117,7 +123,7 @@ void Student::setfAdmissionYear()
 
 void Student::setFaculty()
 {
-	string str;
+	
 	edit->clear(SN.faculty); edit->setLabel("Введите факультет: ");
 	str = edit->getData(editType::onlyLetter, 30).c_str();
 	strncpy_s(SN.faculty, str.c_str(), str.size());
@@ -125,7 +131,7 @@ void Student::setFaculty()
 
 void Student::setDepartment()
 {
-	string str;
+	
 	edit->clear(SN.department); edit->setLabel("Введите кафедру: ");
 	str = edit->getData(editType::onlyLetter, 30).c_str();
 	strncpy_s(SN.department, str.c_str(), str.size());
@@ -133,7 +139,7 @@ void Student::setDepartment()
 
 void Student::setGroup()
 {
-	string str;
+	
 	edit->clear(SN.group); edit->setLabel("Введите номер группы: ");
 	str = edit->getData(editType::onlyLetter, 15).c_str();
 	strncpy_s(SN.group, str.c_str(), str.size());
@@ -141,7 +147,7 @@ void Student::setGroup()
 
 void Student::setRecordBookNumber()
 {
-	string str;
+	
 	edit->clear(SN.recordBookNumber);
 	edit->setLabel("Введите номер зачетной книжки: ");
 	str = edit->getData(editType::all, 15).c_str();
@@ -179,12 +185,6 @@ void Student::editStudent()
 	studMenu->addMenuItem("Введите дату рождения");
 	studMenu->addMenuItem("Просмотреть/Введите успеваемость");
 	int selectedItem = -1;
-	Menu* sexMenu = new Menu("Меню редактирования пола студента");
-	sexMenu->addMenuItem("Выход");
-	sexMenu->addMenuItem("Мужской");
-	sexMenu->addMenuItem("Женский");
-	int sexItem = -1;
-	string str;
 	while (selectedItem != 0) {
 		printInfo();
 		_getch();
@@ -192,68 +192,43 @@ void Student::editStudent()
 		switch (selectedItem)
 		{
 		case 1:
-			edit->clear(SN.surname); edit->setLabel("Введите фамилию: ");
-			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(SN.surname, str.c_str(), str.size());
+			setSurname();
 			break;
 		case 2:
-			edit->clear(SN.name); edit->setLabel("Введите имя: ");
-			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(SN.name, str.c_str(), str.size());
+			setName();
 			break;
 		case 3:
-			edit->clear(SN.patronymic); edit->setLabel("Введите отчество: ");
-			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(SN.patronymic, str.c_str(), str.size());
+			setPatronymic();
 			break;
 		case 4:
-			edit->clear( SN.faculty); edit->setLabel("Введите факультет: ");
-			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s( SN.faculty, str.c_str(), str.size());
+			setFaculty();
 			break;
 		case 5:
-			edit->clear( SN.department); edit->setLabel("Введите кафедру: ");
-			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s( SN.department, str.c_str(), str.size());
+			setDepartment();
 			break;
 		case 6:
-			edit->clear( SN.group); edit->setLabel("Введите номер группы: ");
-			str = edit->getData(editType::onlyLetter, 15).c_str();
-			strncpy_s( SN.group, str.c_str(), str.size());
+			setGroup();
 			break;
 		case 7:
-			while (sexItem != 0) {
-				sexItem = sexMenu->run();
-				if (sexItem == 1) { SN.sex = Sex::male; sexItem = 0; }
-				if (sexItem == 2) { SN.sex = Sex::female; sexItem = 0; }
-			}
+			setSex("Меню редактирования пола");
 
 			break;
 		case 8:
-			edit->clear(to_string( SN.admissionYear));
-			edit->setLabel("Введите год начала обучения: ");
-			SN.admissionYear = edit->getData(editType::onlyDigit, 1940, 2022);
+			setfAdmissionYear();
 			break;
 
 		case 9:
-			edit->clear( SN.recordBookNumber);
-			edit->setLabel("Введите номер зачетной книжки: ");
-			str = edit->getData(editType::all, 15).c_str();
-			strncpy_s( SN.recordBookNumber, str.c_str(), str.size());
+			setRecordBookNumber();
 			break;
 
 		case 10:
-			edit->clear(SN.birthDate);
-			edit->setLabel("Введите дату рождения: ");
-			str = edit->getData(editType::all,15);
-			strncpy_s(SN.birthDate, str.c_str(),10);
+			setBirthDate();
 			break;
 
 		deafault:
 			break;
 		}
 	}
-	delete sexMenu;
 	delete studMenu;
 }
 
