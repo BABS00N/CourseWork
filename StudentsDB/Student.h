@@ -1,42 +1,47 @@
 ﻿#pragma once
-#include "RecordBook.h"
-#include "Person.h"
 #include <iostream>
 #include <string>
 #include "Subject.h"
 #include <Windows.h>
 #include "Menu.h"
 #include <stdio.h>
+#include "StudentNode.h"
 using namespace std;
 
-class Student : protected Person
+class Student
 {
 private:
+	string fileName;
 	EditData* edit;
-protected:
-	int admissionYear;
-	char faculty[30];
-	char department[30];
-	char group[10];
-	char recordBookNumber[9];
-	Subject recordBook[9][10];
+	StudentNode SN;
 public:
 	Student();
 	~Student();
+	void setDefaultData1();//удвлить
+	void setDefaultData2();//удалить
 
-	int getAdmissionYear() { return admissionYear; }
-	char* getFaculty() { return faculty; }
-	char* getDepartment() { return department; }
-	char* getGroup() { return group; }
-	char* getRecordBookNumber() { return recordBookNumber; }
-
-	void setfAdmissionYear(int _year) { admissionYear = _year; }
-	void setFaculty(char* _faculty) { strcpy_s(faculty, _faculty); }
-	void setDepartment(char* _department) { strcpy_s(department,_department); }
-	void setGroup(char* _group) { strcpy_s(group,_group); }
-	void setRecordBookNumber(char* _recordBookNumber) { strcpy_s(recordBookNumber, recordBookNumber); }
+	void setSurname();
+	void setName();
+	void setPatronymic();
+	void setBirthDate();
+	void setSex(string header);
+	void setfAdmissionYear();
+	void setFaculty();
+	void setDepartment();
+	void setGroup();
+	void setRecordBookNumber();
+	//void setRecordBook();
 
 	void setDefaultData();
 	void printInfo();
 	void editStudent();
+
+
+	void addStudentToFile();
+	int countRecords();
+	void getShortInfoFromFile();
+	void setStudentData();
+	void setStudentData(int num);
+	void writeToFileStudentData(int num);
+	void deleteStudent(int num);
 };

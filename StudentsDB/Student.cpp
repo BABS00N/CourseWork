@@ -1,40 +1,163 @@
 ﻿#include "Student.h"
 Student::Student()
 {
+	fileName = "database.bin";
+	edit = new EditData();
 };
 
 Student::~Student()
 {
+	delete edit;
 }
 
 void Student::setDefaultData()
 {
-	strncpy_s(surname, "Иванов", 30);
-	strncpy_s(name, "Иван", 30);
-	strncpy_s(patronymic, "Иванович", 30);
-	strncpy_s(faculty, "ИКБ", 30);
-	strncpy_s(department, "Информационная безопасность", 30);
-	strncpy_s(group, "БББО-05-22", 10);
-	strncpy_s(recordBookNumber, "123456789", 9);
-	birthDate.setDate(01, 01, 2004);
-	sex = Sex::male;
-	admissionYear = 2022;
-	for (int i = 0; i < 9; i++)
+	strncpy_s(SN.surname, "Иванов", 30);
+	strncpy_s(SN.name, "Иван", 30);
+	strncpy_s(SN.patronymic, "Иванович", 30);
+	strncpy_s( SN.faculty, "ИКБ", 30);
+	strncpy_s( SN.department, "Информационная безопасность", 30);
+	strncpy_s( SN.group, "БББО-05-22", 15);
+	strncpy_s( SN.recordBookNumber, "123456789", 15);
+	strncpy_s(SN.birthDate,"01.01.2004",15);
+	SN.sex = Sex::male;
+	 SN.admissionYear = 2022;
+	/*for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
-			recordBook[i][j].isEmpty = true;
-		}
+			SN.recordBook[i][j].isEmpty = true;
+		}*/
+}
+void Student::setDefaultData1()
+{
+	strncpy_s(SN.surname, "Жумайев", 30);
+	strncpy_s(SN.name, "Жумай", 30);
+	strncpy_s(SN.patronymic, "Жумайевич", 30);
+	strncpy_s(SN.faculty, "ИИБ", 30);
+	strncpy_s(SN.department, "Информабубубубпасность", 30);
+	strncpy_s(SN.group, "БСБО-01-22", 15);
+	strncpy_s(SN.recordBookNumber, "3756454", 15);
+	strncpy_s(SN.birthDate, "61.61.2064", 15);
+	SN.sex = Sex::male;
+	SN.admissionYear = 2022;
+	/*for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 10; j++) {
+			SN.recordBook[i][j].isEmpty = true;
+		}*/
+}
+void Student::setDefaultData2()
+{
+	strncpy_s(SN.surname, "Денидиираимон", 30);
+	strncpy_s(SN.name, "Денидиираимон", 30);
+	strncpy_s(SN.patronymic, "Денидиираимон", 30);
+	strncpy_s(SN.faculty, "ИИТХКБ", 30);
+	strncpy_s(SN.department, "Химя", 30);
+	strncpy_s(SN.group, "ИНБО-15-27", 15);
+	strncpy_s(SN.recordBookNumber, "134143143789", 15);
+	strncpy_s(SN.birthDate, "31.31.2094", 15);
+	SN.sex = Sex::male;
+	SN.admissionYear = 2022;
+	/*for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 10; j++) {
+			SN.recordBook[i][j].isEmpty = true;
+		}*/
+}
+
+void Student::setSurname()
+{
+	string str;
+	edit->clear(SN.surname); edit->setLabel("Введите фамилию: ");
+	str = edit->getData(editType::onlyLetter, 30).c_str();
+	strncpy_s(SN.surname, str.c_str(), str.size());
+}
+
+void Student::setName()
+{
+	string str;
+	edit->clear(SN.name); edit->setLabel("Введите имя: ");
+	str = edit->getData(editType::onlyLetter, 30).c_str();
+	strncpy_s(SN.name, str.c_str(), str.size());
+}
+
+void Student::setPatronymic()
+{
+	string str;
+	edit->clear(SN.patronymic); edit->setLabel("Введите отчество: ");
+	str = edit->getData(editType::onlyLetter, 30).c_str();
+	strncpy_s(SN.patronymic, str.c_str(), str.size());
+}
+
+void Student::setBirthDate()
+{
+	string str;
+	edit->clear(SN.birthDate);
+	edit->setLabel("Введите дату рождения: ");
+	str = edit->getData(editType::all, 15);
+	strncpy_s(SN.birthDate, str.c_str(), 10);
+}
+
+void Student::setSex(string header)
+{
+	Menu* sexMenu = new Menu(header);
+	sexMenu->addMenuItem("Выход");
+	sexMenu->addMenuItem("Мужской");
+	sexMenu->addMenuItem("Женский");
+	int sexItem = -1;
+	sexItem = sexMenu->run();
+	if (sexItem == 1) { SN.sex = Sex::male; sexItem = 0; }
+	if (sexItem == 2) { SN.sex = Sex::female; sexItem = 0; }
+}
+
+void Student::setfAdmissionYear()
+{
+	string str;
+	edit->clear(to_string(SN.admissionYear));
+	edit->setLabel("Введите год начала обучения: ");
+	SN.admissionYear = edit->getData(editType::onlyDigit, 1940, 2022);
+}
+
+void Student::setFaculty()
+{
+	string str;
+	edit->clear(SN.faculty); edit->setLabel("Введите факультет: ");
+	str = edit->getData(editType::onlyLetter, 30).c_str();
+	strncpy_s(SN.faculty, str.c_str(), str.size());
+}
+
+void Student::setDepartment()
+{
+	string str;
+	edit->clear(SN.department); edit->setLabel("Введите кафедру: ");
+	str = edit->getData(editType::onlyLetter, 30).c_str();
+	strncpy_s(SN.department, str.c_str(), str.size());
+}
+
+void Student::setGroup()
+{
+	string str;
+	edit->clear(SN.group); edit->setLabel("Введите номер группы: ");
+	str = edit->getData(editType::onlyLetter, 15).c_str();
+	strncpy_s(SN.group, str.c_str(), str.size());
+}
+
+void Student::setRecordBookNumber()
+{
+	string str;
+	edit->clear(SN.recordBookNumber);
+	edit->setLabel("Введите номер зачетной книжки: ");
+	str = edit->getData(editType::all, 15).c_str();
+	strncpy_s(SN.recordBookNumber, str.c_str(), str.size());
 }
 
 void Student::printInfo()
 {
 	cout << endl << " _________Информация о студенте:_________" << endl;
-	cout << " Фамилия: " << surname << " Имя: " << name << " Отчество: " << patronymic << endl;
-	cout << " Факультет: " << faculty << " Кафедра: " << department << " Группа: " << group << endl;
-	cout << " Номер зачетной книжки: " << recordBookNumber << " День рождения: " << birthDate.getDateString() << endl;
+	cout << " Фамилия: " << SN.surname << " Имя: " << SN.name << " Отчество: " << SN.patronymic << endl;
+	cout << " Факультет: " <<  SN.faculty << " Кафедра: " <<  SN.department << " Группа: " <<  SN.group << endl;
+	cout << " Номер зачетной книжки: " <<  SN.recordBookNumber << " День рождения: " << SN.birthDate<< endl;
 	cout << " Пол: ";
-	if (sex == Sex::male) { cout << "мужской "; }
-	if (sex == Sex::female) { cout << "женский "; }
-	cout << " Год  начала обучения: " << admissionYear << endl;
+	if (SN.sex == Sex::male) { cout << "мужской "; }
+	if (SN.sex == Sex::female) { cout << "женский "; }
+	cout << " Год  начала обучения: " <<  SN.admissionYear << endl;
 
 }
 
@@ -69,61 +192,61 @@ void Student::editStudent()
 		switch (selectedItem)
 		{
 		case 1:
-			edit->clear(surname); edit->setLabel("Введите фамилию: ");
+			edit->clear(SN.surname); edit->setLabel("Введите фамилию: ");
 			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(surname, str.c_str(), str.size());
+			strncpy_s(SN.surname, str.c_str(), str.size());
 			break;
 		case 2:
-			edit->clear(name); edit->setLabel("Введите имя: ");
+			edit->clear(SN.name); edit->setLabel("Введите имя: ");
 			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(name, str.c_str(), str.size());
+			strncpy_s(SN.name, str.c_str(), str.size());
 			break;
 		case 3:
-			edit->clear(patronymic); edit->setLabel("Введите отчество: ");
+			edit->clear(SN.patronymic); edit->setLabel("Введите отчество: ");
 			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(patronymic, str.c_str(), str.size());
+			strncpy_s(SN.patronymic, str.c_str(), str.size());
 			break;
 		case 4:
-			edit->clear(faculty); edit->setLabel("Введите факультет: ");
+			edit->clear( SN.faculty); edit->setLabel("Введите факультет: ");
 			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(faculty, str.c_str(), str.size());
+			strncpy_s( SN.faculty, str.c_str(), str.size());
 			break;
 		case 5:
-			edit->clear(department); edit->setLabel("Введите кафедру: ");
+			edit->clear( SN.department); edit->setLabel("Введите кафедру: ");
 			str = edit->getData(editType::onlyLetter, 30).c_str();
-			strncpy_s(department, str.c_str(), str.size());
+			strncpy_s( SN.department, str.c_str(), str.size());
 			break;
 		case 6:
-			edit->clear(group); edit->setLabel("Введите номер группы: ");
-			str = edit->getData(editType::onlyLetter, 10).c_str();
-			strncpy_s(group, str.c_str(), str.size());
+			edit->clear( SN.group); edit->setLabel("Введите номер группы: ");
+			str = edit->getData(editType::onlyLetter, 15).c_str();
+			strncpy_s( SN.group, str.c_str(), str.size());
 			break;
 		case 7:
 			while (sexItem != 0) {
 				sexItem = sexMenu->run();
-				if (sexItem == 1) { sex = Sex::male; sexItem = 0; }
-				if (sexItem == 2) { sex = Sex::female; sexItem = 0; }
+				if (sexItem == 1) { SN.sex = Sex::male; sexItem = 0; }
+				if (sexItem == 2) { SN.sex = Sex::female; sexItem = 0; }
 			}
 
 			break;
 		case 8:
-			edit->clear(to_string(admissionYear));
+			edit->clear(to_string( SN.admissionYear));
 			edit->setLabel("Введите год начала обучения: ");
-			admissionYear = edit->getData(editType::onlyDigit, 1940, 2022);
+			SN.admissionYear = edit->getData(editType::onlyDigit, 1940, 2022);
 			break;
 
 		case 9:
-			edit->clear(recordBookNumber);
+			edit->clear( SN.recordBookNumber);
 			edit->setLabel("Введите номер зачетной книжки: ");
-			str = edit->getData(editType::all, 9).c_str();
-			strncpy_s(recordBookNumber, str.c_str(), str.size());
+			str = edit->getData(editType::all, 15).c_str();
+			strncpy_s( SN.recordBookNumber, str.c_str(), str.size());
 			break;
 
 		case 10:
-			edit->clear(to_string(admissionYear));
+			edit->clear(SN.birthDate);
 			edit->setLabel("Введите дату рождения: ");
-			str = edit->getData(editType::all, 9).c_str();
-			strncpy_s(recordBookNumber, str.c_str(), str.size());
+			str = edit->getData(editType::all,15);
+			strncpy_s(SN.birthDate, str.c_str(),10);
 			break;
 
 		deafault:
@@ -132,6 +255,98 @@ void Student::editStudent()
 	}
 	delete sexMenu;
 	delete studMenu;
+}
 
+void Student::addStudentToFile()
+{
+	FILE* binaryFile;
+	fopen_s(&binaryFile, fileName.c_str(), "a+");
+	fwrite(&SN, sizeof(SN), 1, binaryFile);
+	fclose(binaryFile);
+}
+
+int Student::countRecords()
+{
+	FILE* binaryFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+	fseek(binaryFile, 0L, SEEK_END);
+	int size = ftell(binaryFile);
+	fclose(binaryFile);
+	return size / sizeof(SN);
+}
+
+void Student::getShortInfoFromFile()
+{
+	system("cls");
+	cout << "Список данных о студентах: " << endl;
+	int size = countRecords();
+	FILE* binaryFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+	for (int i = 0; i < size; i++) {
+		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
+		cout << i << ". " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
+	}
+	fclose(binaryFile);
+	_getch();
+	edit->clear();
+	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
+	int num = edit->getData(editType::onlyDigit, 0, size);
+	setStudentData(num);
+	editStudent();
+	writeToFileStudentData(num);
+}
+
+void Student::setStudentData()
+{
+
+}
+
+void Student::setStudentData(int num)
+{
+	FILE* binaryFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+	fseek(binaryFile, num * sizeof(SN), SEEK_SET);
+	fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
+	fclose(binaryFile);
+}
+
+void Student::writeToFileStudentData(int num)
+{
+	int size = countRecords();
+	FILE* binaryFile;
+	FILE* tmpFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+	fopen_s(&tmpFile, "tmp.txt", "w+");
+	StudentNode tmp_SN;
+	for (int i = 0; i < size; i++) {
+		fread_s(&tmp_SN, sizeof(tmp_SN), sizeof(tmp_SN), 1, binaryFile);
+		if (i == num)
+			fwrite(&SN, sizeof(SN), 1, tmpFile);
+		else
+			fwrite(&tmp_SN, sizeof(tmp_SN), 1, tmpFile);
+	}
+	fclose(binaryFile);
+	fclose(tmpFile);
+	remove(fileName.c_str());
+	rename("tmp.txt", fileName.c_str());
+}
+
+void Student::deleteStudent(int num)
+{
+	int size = countRecords();
+	FILE* binaryFile;
+	FILE* tmpFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+	fopen_s(&tmpFile, "tmp.txt", "w+");
+	StudentNode tmp_SN;
+	for (int i = 0; i < size; i++) {
+		fread_s(&tmp_SN, sizeof(tmp_SN), sizeof(tmp_SN), 1, binaryFile);
+		if (i != num)
+			fwrite(&tmp_SN, sizeof(tmp_SN), 1, tmpFile);
+	}
+	fclose(binaryFile);
+	fclose(tmpFile);
+	remove(fileName.c_str());
+	rename("tmp.txt", fileName.c_str());
 }
 

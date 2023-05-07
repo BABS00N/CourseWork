@@ -4,18 +4,15 @@
 #include "Student.h"
 #include "Menu.h"
 using namespace std;
-
+#include "EditData.h"
 int main()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-
-    ClassMenu* mainMenu = new ClassMenu("Основное меню");
-    mainMenu->addMenuItem("Выход");
-    mainMenu->addMenuItem("Добавить данные о студенте");
-    mainMenu->addMenuItem("Отобразить/изменить данные о студентах");
-    mainMenu->addMenuItem("Удалить студента");
-    mainMenu->addMenuItem("Выполнить задание");
-    int selectedItem = mainMenu->run();
-    cout << endl << "Вы выбрали: " << selectedItem;
+	Student a;
+	//a.setDefaultData();
+	//a.addStudentToFile();
+	//a.setDefaultData1();
+	//a.addStudentToFile();
+	//a.setDefaultData2();
+	//a.addStudentToFile();
+	a.deleteStudent(1);
 }

@@ -1,8 +1,12 @@
 #pragma once
 #include <iostream>
 #include <string.h>
-#include "Date.h"
+//#include "Date.h"
+using namespace std;
+class Date
+{
 
+};
 enum class Sex : char { male='Ì', female='Æ' };
 
 class Person
@@ -31,7 +35,7 @@ public:
 	void setName(char* _name) { strcpy_s(name,_name); }
 	void setSurname(char* _surname) { strcpy_s(name,_surname); }
 	void setPatronymic(char* _patronymic) { strcpy_s(patronymic,_patronymic); }
-	void setBirthDate(Date _birthDate) { birthDate.setDate(_birthDate); }
+	//void setBirthDate(Date _birthDate) { birthDate.setDate(_birthDate); }
 	void setSex(Sex _sex) { sex = _sex; }
 };
 

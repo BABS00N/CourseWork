@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-enum class markType : char { Fail, Pass, Excellent5, Good4, Satisfactory3, Bad2 };
+enum class markType : char { Fail, Pass, Excellent, Good, Satisfactory, Bad };
 
 struct Subject
 {

@@ -25,10 +25,11 @@ public:
 	
 	EditData();
 
+	void reverseDate(string & _date);
 	void clear(string _data = "");
 	void setLabel(string _label);
 	string getData(editType _type);
 	int getData(editType et, int min, int max);
 	string getData(editType et, int len);
-
+	string getData(string minDate, string maxDate);
 };

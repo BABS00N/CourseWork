@@ -1,5 +1,22 @@
 ﻿#include "EditData.h"
 
+void EditData::reverseDate(string & _date)
+{
+	string temp;
+	//_date = _date[6] + _date[7] + _date[8] + _date[9] + '.' + _date[3] + _date[4] + '.' + _date[0] + _date[1];
+	temp.push_back(_date[6]);
+	temp.push_back(_date[7]);
+	temp.push_back(_date[8]);
+	temp.push_back(_date[9]);
+	temp.push_back(_date[5]);
+	temp.push_back(_date[3]);
+	temp.push_back(_date[4]);
+	temp.push_back(_date[2]);
+	temp.push_back(_date[0]);
+	temp.push_back(_date[1]);
+	_date = temp;
+}
+
 void EditData::clear(string _data)
 {
 	system("cls");
@@ -74,31 +91,31 @@ bool EditData::isSpecCharacter(char ch)
 
 bool EditData::isDateString(string _str)
 {
-	int fix = 0;
+	if (_str.length() != 10)
+		return false;
+	if (not(_str[2] == 46 or _str[5] == 46))
+		return false;
+	int influenceOfDots = 0;
 	for (int i = 0; i <3;i++)
 	{
 		if (i < 2)
 		{
 			for (int j = 0; j < 2; j++)
 			{
-				if (not isDigit(_str[i * 3 + j + fix]))
+				if (not isDigit(_str[i * 4 + j + influenceOfDots]))
 					return false;
 			}
-			if (not(_str[i + 2] == 46) and i != 2)
-				return false;
-			fix--;
+			influenceOfDots--;
 		}
 		else
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				if (not isDigit(_str[i * 3 + j + fix]))
+				if (not isDigit(_str[i * 4 + j + influenceOfDots]))
 					return false;
 			}
 		}
 	}
-	if (_str.length() == 0)
-		return false;
 	return true;
 }
 
@@ -106,10 +123,10 @@ string EditData::getData(editType _type)
 {
 	cout << label << endl << data;
 	char ch = 0;
-	while (ch != 13)//enter
+	while (ch != 13)
 	{
 		ch = _getch();
-		if (ch == 0)
+		if (ch == 8)
 		{
 			if (data.length() > 0)
 			{
@@ -171,3 +188,31 @@ string EditData::getData(editType et, int len)
 		return data;
 	}
 }
+
+string EditData::getData(string minDate, string maxDate)
+{
+	string date,changeDate,changeMinDate,changeMaxDate;
+	data = getData(editType::all);
+	//date = changeDate = "10.10.2010";
+	changeMinDate = minDate;
+	changeMaxDate = maxDate;
+	if (isDateString(date))
+	{
+		
+		reverseDate(changeMinDate);
+		reverseDate(changeMaxDate);
+		reverseDate(changeDate);
+		if (not((changeMinDate <= changeDate) and (changeDate <= changeMaxDate)))
+		{
+			cout << endl << "Ошибка: Дата, которую вы ввели: " << date << " Должна находиться в диапазоне (" << minDate << " <= " << date << " <= " << maxDate << ") ";
+			getData(minDate, maxDate);
+		}
+		return date;
+	}
+	else
+	{
+		cout << endl << "Ошибка: Дата, которую вы ввели: " << data << " Должна принимать вид ( DD.MM.YYYY ) ";
+		getData(minDate, maxDate);
+	}
+}
+
