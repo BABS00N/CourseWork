@@ -25,7 +25,7 @@ public:
 	void setPatronymic();
 	void setBirthDate();
 	void setSex(string header);
-	void setfAdmissionYear();
+	void setAdmissionYear();
 	void setFaculty();
 	void setDepartment();
 	void setGroup();

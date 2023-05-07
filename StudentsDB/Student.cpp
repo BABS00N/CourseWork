@@ -176,13 +176,16 @@ void Student::editStudent()
 	studMenu->addMenuItem("Введите фамилию");
 	studMenu->addMenuItem("Введите имя");
 	studMenu->addMenuItem("Введите отчество");
+	studMenu->addMenuItem("Введите дату рождения");
+	studMenu->addMenuItem("Введите год  начала обучения");
+
 	studMenu->addMenuItem("Введите факультет");
 	studMenu->addMenuItem("Введите кафедру");
 	studMenu->addMenuItem("Введите номер группы");
-	studMenu->addMenuItem("Введите пол");
-	studMenu->addMenuItem("Введите год  начала обучения");
+
 	studMenu->addMenuItem("Введите номер зачетной книжки");
-	studMenu->addMenuItem("Введите дату рождения");
+	studMenu->addMenuItem("Введите пол");
+	
 	studMenu->addMenuItem("Просмотреть/Введите успеваемость");
 	int selectedItem = -1;
 	while (selectedItem != 0) {
@@ -201,28 +204,25 @@ void Student::editStudent()
 			setPatronymic();
 			break;
 		case 4:
-			setFaculty();
+			setBirthDate();
 			break;
 		case 5:
-			setDepartment();
+			setAdmissionYear();
 			break;
 		case 6:
-			setGroup();
+			setFaculty();
 			break;
 		case 7:
-			setSex("Меню редактирования пола");
-
+			setDepartment;
 			break;
 		case 8:
-			setfAdmissionYear();
+			setGroup();
 			break;
-
 		case 9:
 			setRecordBookNumber();
 			break;
-
 		case 10:
-			setBirthDate();
+			setSex("Меню редактирования пола");
 			break;
 
 		deafault:
@@ -273,7 +273,17 @@ void Student::getShortInfoFromFile()
 
 void Student::setStudentData()
 {
-
+	setSurname();
+	setName();
+	setPatronymic();
+	setBirthDate();
+	setAdmissionYear();
+	setFaculty();
+	setDepartment();
+	setGroup();
+	setRecordBookNumber();
+	setSex("Меню добавления пола");
+	//setRecordBook();
 }
 
 void Student::setStudentData(int num)
