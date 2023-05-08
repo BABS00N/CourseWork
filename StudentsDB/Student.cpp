@@ -293,12 +293,12 @@ void Student::getShortInfoFromFile()
 	edit->clear();
 	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
 	int num = edit->getData(editType::onlyDigit, 0, size);
-	setStudentData(num);
+	setStudentNodeFromFile(num);
 	editStudent();
 	writeToFileStudentData(num);
 }
 
-void Student::setStudentData()
+void Student::setStudentNodeFromFile()
 {
 	clearStudentNode();
 	setSurname();
@@ -314,7 +314,7 @@ void Student::setStudentData()
 	//setRecordBook();
 }
 
-void Student::setStudentData(int num)
+void Student::setStudentNodeFromFile(int num)
 {
 	FILE* binaryFile;
 	fopen_s(&binaryFile, fileName.c_str(), "r");
@@ -344,7 +344,7 @@ void Student::writeToFileStudentData(int num)
 	rename("tmp.txt", fileName.c_str());
 }
 
-void Student::deleteStudent(int num)
+void Student::deleteStudentFromFile(int num)
 {
 	int size = countRecords();
 	FILE* binaryFile;
@@ -369,30 +369,24 @@ void Student::sortingStudentsByAdmissionYear()
 	List<StudentNode> studentList;
 	for (int i = 0; i < countItems; i++)
 	{
-		setStudentData(i);
+		setStudentNodeFromFile(i);
 		studentList.pushBack(SN);
 	}
-
-	unsigned short _admissionYear = studentList[0].admissionYear;
-	for (int i = 0; i < countItems-1; i++)
-	{
-		unsigned short max = studentList[i].admissionYear;
-		int i_max = i;
-		for (int j = i+1; j < countItems; j++)
-		{
-			if (max > studentList[j].admissionYear)
-			{
-				max = studentList[j].admissionYear;
-				i_max = j;
+	
+	for (int i = 0; i < countItems; i++) {
+		for (int j = 0; j < countItems - 1; j++) {
+			if (studentList[j].admissionYear < studentList[j + 1].admissionYear) {
+				StudentNode tmp = studentList[j];
+				studentList[j] = studentList[j + 1];
+				studentList[j + 1] = tmp;
 			}
 		}
-		swap(studentList[i_max].admissionYear, studentList[i].admissionYear);
 	}
 
 	for (int i = 0; i < countItems; i++)
 	{
 		SN = studentList[i];
-		deleteStudent(0);
+		deleteStudentFromFile(0);
 		addStudentToFile();
 	} 
 }

@@ -3,7 +3,6 @@
 void EditData::reverseDate(string & _date)
 {
 	string temp;
-	//_date = _date[6] + _date[7] + _date[8] + _date[9] + '.' + _date[3] + _date[4] + '.' + _date[0] + _date[1];
 	temp.push_back(_date[6]);
 	temp.push_back(_date[7]);
 	temp.push_back(_date[8]);
@@ -63,7 +62,7 @@ bool EditData::isLetter(char ch)
 		return true;
 	if (97 <= ch and ch <= 122)
 		return true;
-	if (192 <= ch and ch <= 255)
+	if (-200 <= ch and ch <= -1)
 		return true;
 	return false;
 }
@@ -193,7 +192,6 @@ string EditData::getData(string minDate, string maxDate)
 {
 	string date,changeDate,changeMinDate,changeMaxDate;
 	data = getData(editType::all);
-	//date = changeDate = "10.10.2010";
 	changeMinDate = minDate;
 	changeMaxDate = maxDate;
 	if (isDateString(date))

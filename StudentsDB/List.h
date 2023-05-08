@@ -1,182 +1,159 @@
 #pragma once
 #include "Node.h"
 #include <iostream>
-using namespace std;
 
-template<typename T>
+template <typename T>
 class List
 {
-    friend class Student;
-
 private:
-	Node<T>* head;
-	int countItem;
+	int size;
+	Node<T>* head, * tail;
 public:
 	List();
 	~List();
 
-	void clear();
+	void pushBack(T data);
+	int getSize() { return size; }
+	T& operator[](const int index);
 	void popFront();
-	void popBack();
-
-	int getSize();
-
-	void pushFront(T _data);
-	void pushBack(T _data);
-	void insertByIndex(T _data, int index);
+	void clear();
+	void pushFront(T data);
+	void insertByIndex(T data, int index);
 	void deleteByIndex(int index);
-    void printItems4Menu();
-
-    T& operator[](int index);
+	void popBack();
+	void printItems4Menu();
 };
 
-template<typename T>
-List<T>::List()
+template <typename T>
+inline List<T>::List()
 {
-    countItem = 0;
-    head = nullptr;
+	size = 0;
+	head = tail = nullptr;
 }
 
 template<typename T>
-List<T>::~List()
+inline List<T>::~List()
 {
-    Node<T>* current = head;
-    Node<T>* temp;
-    for (int i = 0; i < countItem; i++)
-    {
-        temp = current;
-        current = head->next;
-        delete temp;
-    }
+	clear();
 }
 
 template<typename T>
-void List<T>::clear()
+void List<T>::pushBack(T data)
 {
-    Node<T>* current = head;
-    Node<T>* temp;
-    for (int i = 0; i < countItem; i++)
-    {
-        temp = current;
-        current = head->next;
-        delete temp;
-    }
+	Node<T>* pNew = new Node<T>(data);
+	if (tail != nullptr)
+	{
+		tail->next = pNew;
+		tail = pNew;
+	}
+	else if (head == nullptr)
+	{
+		head = tail = pNew;
+	}
+	size++;
+}
+
+template<typename T>
+T& List<T>::operator[](const int index)
+{
+	Node<T>* current = this->head;
+	int cnt = 0;
+	while (current != nullptr)
+	{
+		if (cnt == index) return current->data;
+		current = current->next;
+		cnt++;
+	}
 }
 
 template<typename T>
 void List<T>::popFront()
 {
-    Node<T>* temp = head;
-    head = head->next;
-    delete temp;
-    countItem--;
+	if (head == nullptr) return;
+	if (head == tail)
+	{
+		delete tail;
+		head = tail = nullptr;
+		size--;
+		return;
+	}
+	Node<T>* pTemp = this->head;
+	head = head->next;
+	delete pTemp;
+	size--;
 }
 
 template<typename T>
-void List<T>::popBack()
+void List<T>::clear()
 {
-    Node<T>* current = head;
-    for (int i = 0; i < countItem; i++)
-    {
-        current = current->next;
-    }
-    delete current;
-    countItem--;
+	while (size)
+	{
+		popFront();
+	}
 }
 
 template<typename T>
-int List<T>::getSize()
+void List<T>::pushFront(T data)
 {
-    return countItem;
+	head = new Node<T>(data, head);
+	size++;
+	if (tail == nullptr) tail = head;
 }
 
 template<typename T>
-void List<T>::pushFront(T _data)
+void List<T>::insertByIndex(T data, int index)
 {
-    head = new Node<T>(data, head);
-    countItem++;
-}
-
-template<typename T>
-void List<T>::pushBack(T _data)
-{
-    if (head == nullptr)
-    {
-        head = new Node<T>(data);
-    }
-    else
-    {
-        Node<T>* current = head;
-        while (current->next != nullptr)
-        {
-            current = current->next;
-        }
-        current->next = new Node<T>(data);
-    }
-    countItem++;
-}
-
-template<typename T>
-void List<T>::insertByIndex(T _data, int index)
-{
-    if (index == 0)
-    {
-        pushFront(_data);
-    }
-    else
-    {
-        Node<T>* previous = head;
-        for (int i = 0; i < index - 1; i++)
-        {
-            previous = previous->next;
-        }
-        Node<T>* newItem = new Node<T>(data, previous->next);
-        previous->next = newItem;
-        countItem++;
-    }
+	if (index == 0) pushFront(data);
+	else
+	{
+		Node<T>* pLeft = this->head;
+		for (int i = 0; i < index - 1; i++)
+		{
+			pLeft = pLeft->next;
+		}
+		pLeft->next = new Node<T>(data, pLeft->next);
+		size++;
+		if (pLeft->next->next == nullptr) tail = pLeft->next;
+	}
 }
 
 template<typename T>
 void List<T>::deleteByIndex(int index)
 {
-    if (index == 0)
-    {
-        popFront();
-    }
-    else
-    {
-        Node<T>* previous = head;
-        Node<T>* current = head->next;
-        for (int i = 0; i < (index - 1); i++)
-        {
-            previous = previous->next;
-            current = current->next;
-        }
-        previous->next = current->next;
-        delete current;
-        countItem--;
-    }
+	if (index < 0) return;
+	if (index == 0)
+	{
+		popFront();
+		return;
+	}
+	else
+	{
+		Node<T>* pLeft = this->head;
+		for (int i = 0; i < index - 1; i++)
+		{
+			pLeft = pLeft->next;
+		}
+		Node<T>* ptoDelete = pLeft->next;
+		pLeft->next = ptoDelete->next;
+		delete ptoDelete;
+		size--;
+	}
 }
 
 template<typename T>
-inline void List<T>::printItems4Menu()
+void List<T>::popBack()
 {
-    struct Node<T>* current = head;
-    int i = 0;
-    while (current != NULL) {
-        cout << i << ". " << current->data << endl;
-        i++;
-        current = current->next;
-    }
+	deleteByIndex(size - 1);
 }
 
 template<typename T>
-inline T& List<T>::operator[](int index)
+void List<T>::printItems4Menu()
 {
-    Node<T>* current = head;
-    for (int i = 0; i <= index; i++)
-    {
-        current = current->next;
-    }
-    return current->data;
+	Node<T>* current = this->head;
+	int i = 0;
+	while (current != nullptr) {
+		std::cout << i << ". " << current->data << std::endl;
+		i++;
+		current = current->next;
+	}
 }

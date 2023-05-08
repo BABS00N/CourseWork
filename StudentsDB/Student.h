@@ -43,10 +43,10 @@ public:
 	void addStudentToFile();
 	int countRecords();
 	void getShortInfoFromFile();
-	void setStudentData();
-	void setStudentData(int num);
+	void setStudentNodeFromFile();
+	void setStudentNodeFromFile(int num);
 	void writeToFileStudentData(int num);
-	void deleteStudent(int num);
+	void deleteStudentFromFile(int num);
 
 	void sortingStudentsByAdmissionYear();
 };

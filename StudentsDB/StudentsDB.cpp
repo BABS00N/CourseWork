@@ -7,7 +7,10 @@ using namespace std;
 #include "EditData.h"
 int main()
 {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	Student a;
+	//a.editStudent();
 	//a.setDefaultData();
 	//a.addStudentToFile();
 	//a.setDefaultData1();
