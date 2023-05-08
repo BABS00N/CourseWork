@@ -8,11 +8,11 @@ using namespace std;
 int main()
 {
 	Student a;
-	//a.setDefaultData();
-	//a.addStudentToFile();
-	//a.setDefaultData1();
-	//a.addStudentToFile();
-	//a.setDefaultData2();
-	//a.addStudentToFile();
-	a.deleteStudent(1);
+	a.setDefaultData();
+	a.addStudentToFile();
+	a.setDefaultData1();
+	a.addStudentToFile();
+	a.setDefaultData2();
+	a.addStudentToFile();
+	//a.deleteStudent(1);
 }

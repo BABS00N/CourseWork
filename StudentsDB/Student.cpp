@@ -2,6 +2,15 @@
 
 string str;
 
+template<typename T>
+inline void Student::swap(T& a, T& b)
+{
+	T temp;
+	temp = a;
+	a = b;
+	b = temp;
+}
+
 Student::Student()
 {
 	fileName = "database.bin";
@@ -232,6 +241,24 @@ void Student::editStudent()
 	delete studMenu;
 }
 
+void Student::clearStudentNode()
+{
+	strncpy_s(SN.surname, "", 30);
+	strncpy_s(SN.name, "", 30);
+	strncpy_s(SN.patronymic, "", 30);
+	strncpy_s(SN.faculty, "", 30);
+	strncpy_s(SN.department, "", 30);
+	strncpy_s(SN.group, "", 15);
+	strncpy_s(SN.recordBookNumber, "", 15);
+	strncpy_s(SN.birthDate, "", 15);
+	SN.sex = Sex::male;
+	SN.admissionYear = 0;
+	/*for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 10; j++) {
+			SN.recordBook[i][j].isEmpty = true;
+		}*/
+}
+
 void Student::addStudentToFile()
 {
 	FILE* binaryFile;
@@ -273,6 +300,7 @@ void Student::getShortInfoFromFile()
 
 void Student::setStudentData()
 {
+	clearStudentNode();
 	setSurname();
 	setName();
 	setPatronymic();
@@ -335,3 +363,36 @@ void Student::deleteStudent(int num)
 	rename("tmp.txt", fileName.c_str());
 }
 
+void Student::sortingStudentsByAdmissionYear()
+{
+	int countItems = countRecords();
+	List<StudentNode> studentList;
+	for (int i = 0; i < countItems; i++)
+	{
+		setStudentData(i);
+		studentList.pushBack(SN);
+	}
+
+	unsigned short _admissionYear = studentList[0].admissionYear;
+	for (int i = 0; i < countItems-1; i++)
+	{
+		unsigned short max = studentList[i].admissionYear;
+		int i_max = i;
+		for (int j = i+1; j < countItems; j++)
+		{
+			if (max > studentList[j].admissionYear)
+			{
+				max = studentList[j].admissionYear;
+				i_max = j;
+			}
+		}
+		swap(studentList[i_max].admissionYear, studentList[i].admissionYear);
+	}
+
+	for (int i = 0; i < countItems; i++)
+	{
+		SN = studentList[i];
+		deleteStudent(0);
+		addStudentToFile();
+	}
+}

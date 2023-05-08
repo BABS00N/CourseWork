@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include <stdio.h>
 #include "StudentNode.h"
+#include "List.h"
 using namespace std;
 
 class Student
@@ -14,6 +15,8 @@ private:
 	string fileName;
 	EditData* edit;
 	StudentNode SN;
+	template <typename T>
+	void swap(T& a, T& b);
 public:
 	Student();
 	~Student();
@@ -35,7 +38,7 @@ public:
 	void setDefaultData();
 	void printInfo();
 	void editStudent();
-
+	void clearStudentNode();
 
 	void addStudentToFile();
 	int countRecords();
@@ -44,4 +47,6 @@ public:
 	void setStudentData(int num);
 	void writeToFileStudentData(int num);
 	void deleteStudent(int num);
+
+	void sortingStudentsByAdmissionYear();
 };

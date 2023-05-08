@@ -6,6 +6,8 @@ using namespace std;
 template<typename T>
 class List
 {
+    friend class Student;
+
 private:
 	Node<T>* head;
 	int countItem;
@@ -24,7 +26,8 @@ public:
 	void insertByIndex(T _data, int index);
 	void deleteByIndex(int index);
     void printItems4Menu();
-    
+
+    T& operator[](int index);
 };
 
 template<typename T>
@@ -179,4 +182,15 @@ inline void List<T>::printItems4Menu()
         i++;
         current = current->next;
     }
+}
+
+template<typename T>
+inline T& List<T>::operator[](int index)
+{
+    Node<T>* current = head;
+    for (int i = 0; i <= index; i++)
+    {
+        current = current->next;
+    }
+    return current->data;
 }
