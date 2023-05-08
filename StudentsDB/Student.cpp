@@ -33,7 +33,7 @@ void Student::setDefaultData()
 	strncpy_s( SN.recordBookNumber, "123456789", 15);
 	strncpy_s(SN.birthDate,"01.01.2004",15);
 	SN.sex = Sex::male;
-	 SN.admissionYear = 2022;
+	 SN.admissionYear = 2023;
 	/*for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
@@ -50,7 +50,7 @@ void Student::setDefaultData1()
 	strncpy_s(SN.recordBookNumber, "3756454", 15);
 	strncpy_s(SN.birthDate, "61.61.2064", 15);
 	SN.sex = Sex::male;
-	SN.admissionYear = 2022;
+	SN.admissionYear = 2021;
 	/*for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
@@ -222,7 +222,7 @@ void Student::editStudent()
 			setFaculty();
 			break;
 		case 7:
-			setDepartment;
+			setDepartment();
 			break;
 		case 8:
 			setGroup();
