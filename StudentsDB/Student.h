@@ -33,7 +33,7 @@ public:
 	void setDepartment();
 	void setGroup();
 	void setRecordBookNumber();
-	//void setRecordBook();
+	//void setRecordBook(); 
 
 	void setDefaultData();
 	void printInfo();

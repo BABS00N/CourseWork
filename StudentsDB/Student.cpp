@@ -394,5 +394,5 @@ void Student::sortingStudentsByAdmissionYear()
 		SN = studentList[i];
 		deleteStudent(0);
 		addStudentToFile();
-	}
+	} 
 }
