@@ -16,30 +16,11 @@ private:
 	string downTitle;
 public:
 
-	Menu(string _upTitle) {
-		upTitle = move(_upTitle);
-	}
-
+	Menu(string _upTitle);
 	Menu() : Menu("Главное меню") {
 		downTitle = "Выберите пункт из меню (число): ";
 	}
-
-	void addMenuItem(string _item) {
-		items.pushBack(_item);
-	}
-	void draw() {
-		system("cls");
-		cout << upTitle << endl;
-		items.printItems4Menu();
-		cout << downTitle << endl;
-	}
-	int run() {
-		draw();
-		EditData* cl = new EditData();
-		cl->setLabel("Введите число");
-		int min = 0, max = items.getSize();
-		int selectItem = cl->getData(editType::onlyDigit, min, max);
-		delete cl;
-		return selectItem;
-	}
+	void addMenuItem(string _item);
+	void draw();
+	int run();
 };

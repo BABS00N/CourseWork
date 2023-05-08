@@ -113,7 +113,7 @@ void Student::setSex(string header)
 	delete sexMenu;
 }
 
-void Student::setfAdmissionYear()
+void Student::setAdmissionYear()
 {
 	
 	edit->clear(to_string(SN.admissionYear));
