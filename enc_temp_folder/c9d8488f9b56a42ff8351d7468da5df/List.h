@@ -93,26 +93,24 @@ int List<T>::getSize()
 template<typename T>
 void List<T>::pushFront(T _data)
 {
-    head = new Node<T>(data, head);
+    Node<T>* newItem = new Node<T>;
+    newItem->data = _data;
+    newItem->next = head;
+    head = newItem;
     countItem++;
 }
 
 template<typename T>
 void List<T>::pushBack(T _data)
 {
-    if (head == nullptr)
+    Node<T>* newItem = new Node<T>;
+    newItem->data = _data;
+    Node<T>* current = head;
+    for (int i = 0; i < countItem; i++)
     {
-        head = new Node<T>(data);
+        current = current->next;
     }
-    else
-    {
-        Node<T>* current = head;
-        while (current->next != nullptr)
-        {
-            current = current->next;
-        }
-        current->next = new Node<T>(data);
-    }
+    current->next = newItem;
     countItem++;
 }
 
@@ -123,16 +121,28 @@ void List<T>::insertByIndex(T _data, int index)
     {
         pushFront(_data);
     }
+    else if (index == countItem - 1)
+    {
+        pushBack(_data);
+    }
+    else if (0 < index and index < countItem)
+    {
+        Node<T>* newItem = new Node<T>;
+        newItem->data = _data;
+        Node<T>* current = head;
+        Node<T>* temp;
+        for (int i = 0; i < index; i++)
+        {
+            current = current->next;
+        }
+        temp = current->next;
+        current->next = newItem;
+        newItem->next = temp;
+        countItem++;
+    }
     else
     {
-        Node<T>* previous = head;
-        for (int i = 0; i < index - 1; i++)
-        {
-            previous = previous->next;
-        }
-        Node<T>* newItem = new Node<T>(data, previous->next);
-        previous->next = newItem;
-        countItem++;
+        cout << "Invalid index" << endl;
     }
 }
 
@@ -143,7 +153,7 @@ void List<T>::deleteByIndex(int index)
     {
         popFront();
     }
-    else
+    else if (0 < index < countItem)
     {
         Node<T>* previous = head;
         Node<T>* current = head->next;
@@ -155,6 +165,10 @@ void List<T>::deleteByIndex(int index)
         previous->next = current->next;
         delete current;
         countItem--;
+    }
+    else
+    {
+        cout << "Invalid index" << endl;
     }
 }
 
