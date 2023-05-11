@@ -178,7 +178,6 @@ void Student::printInfo()
 
 void Student::editStudent()
 {
-	setDefaultData();
 	Menu* studMenu = new Menu("Меню редактирования студента");
 
 	studMenu->addMenuItem("Выход");
@@ -199,6 +198,7 @@ void Student::editStudent()
 	int selectedItem = -1;
 	while (selectedItem != 0) {
 		printInfo();
+		cout << "\nНажмите любую клавишу\n";
 		_getch();
 		selectedItem = studMenu->run();
 		switch (selectedItem)
@@ -286,19 +286,53 @@ void Student::getShortInfoFromFile()
 	fopen_s(&binaryFile, fileName.c_str(), "r");
 	for (int i = 0; i < size; i++) {
 		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
-		cout << i << ". " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
+		cout << i << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
 	}
 	fclose(binaryFile);
+	cout << "\nНажмиту любую клавишу\n";
 	_getch();
 	edit->clear();
 	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
 	int num = edit->getData(editType::onlyDigit, 0, size);
+	edit->clear();
 	setStudentNodeFromFile(num);
 	editStudent();
 	writeToFileStudentData(num);
 }
 
-void Student::setStudentNodeFromFile()
+void Student::getShortInfoFromFile(string minYear, string maxYear)
+{
+	system("cls");
+	cout << "Список данных о студентах с интервалом года рождения "<< minYear << "-"<< maxYear <<": " << endl;
+	int size = countRecords();
+	FILE* binaryFile;
+	fopen_s(&binaryFile, fileName.c_str(), "r");
+
+	int idOfSortedElements = 0;
+	string birthYear;
+	for (int i = 0; i < size; i++) {
+		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
+		birthYear.substr(6,9);
+		if (minYear <= birthYear and birthYear <= maxYear)
+		{
+			cout << idOfSortedElements << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
+
+		}
+	}
+
+	fclose(binaryFile);
+	cout << "\nНажмиту любую клавишу\n";
+	_getch();
+	edit->clear();
+	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
+	int num = edit->getData(editType::onlyDigit, 0, size);
+	edit->clear();
+	setStudentNodeFromFile(num);
+	editStudent();
+	writeToFileStudentData(num);
+}
+
+void Student::setStudentNode()
 {
 	clearStudentNode();
 	setSurname();
@@ -388,5 +422,5 @@ void Student::sortingStudentsByAdmissionYear()
 		SN = studentList[i];
 		deleteStudentFromFile(0);
 		addStudentToFile();
-	} 
+	}
 }

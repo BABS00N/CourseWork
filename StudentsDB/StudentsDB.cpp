@@ -10,6 +10,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	Student a;
+	a.getShortInfoFromFile();
 	//a.editStudent();
 	//a.setDefaultData();
 	//a.addStudentToFile();
@@ -18,5 +19,5 @@ int main()
 	//a.setDefaultData2();
 	//a.addStudentToFile();
 	//a.deleteStudent(1);
-	a.sortingStudentsByAdmissionYear();
+	//a.sortingStudentsByAdmissionYear();
 } 

@@ -153,6 +153,7 @@
     <ClCompile Include="StudentsDB.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CryptoTools.h" />
     <ClInclude Include="EditData.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Menu.h" />

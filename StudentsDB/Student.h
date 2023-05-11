@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include "StudentNode.h"
 #include "List.h"
+#include "CryptoTools.h"
+
 using namespace std;
 
 class Student
@@ -43,7 +45,8 @@ public:
 	void addStudentToFile();
 	int countRecords();
 	void getShortInfoFromFile();
-	void setStudentNodeFromFile();
+	void getShortInfoFromFile(string minYear, string maxYear);
+	void setStudentNode();
 	void setStudentNodeFromFile(int num);
 	void writeToFileStudentData(int num);
 	void deleteStudentFromFile(int num);
