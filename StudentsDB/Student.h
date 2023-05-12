@@ -22,6 +22,7 @@ private:
 public:
 	Student();
 	~Student();
+	void setDefaultData();
 	void setDefaultData1();//удвлить
 	void setDefaultData2();//удалить
 
@@ -35,9 +36,12 @@ public:
 	void setDepartment();
 	void setGroup();
 	void setRecordBookNumber();
-	//void setRecordBook(); 
+	void setSubject();
+	void setRecordBook(int subject);
+	void editRecordBook(string header);
+	void printSessions();
 
-	void setDefaultData();
+	//void setDefaultData();
 	void printInfo();
 	void editStudent();
 	void clearStudentNode();

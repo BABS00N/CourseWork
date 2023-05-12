@@ -34,10 +34,10 @@ void Student::setDefaultData()
 	strncpy_s(SN.birthDate,"01.01.2004",15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2023;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 void Student::setDefaultData1()
 {
@@ -51,10 +51,10 @@ void Student::setDefaultData1()
 	strncpy_s(SN.birthDate, "61.61.2064", 15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2021;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 void Student::setDefaultData2()
 {
@@ -68,10 +68,10 @@ void Student::setDefaultData2()
 	strncpy_s(SN.birthDate, "31.31.2094", 15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2022;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 
 void Student::setSurname()
@@ -163,6 +163,58 @@ void Student::setRecordBookNumber()
 	strncpy_s(SN.recordBookNumber, str.c_str(), str.size());
 }
 
+void Student::setSubject()
+{
+
+}
+
+void Student::setRecordBook(int subject)
+{/*
+	int selectedItem = -1;
+	Menu* editSubjectsMenu = new Menu("");
+	editSubjectsMenu->addMenuItem("Выход");
+	editSubjectsMenu->addMenuItem("Список сессий");
+	editSubjectsMenu->addMenuItem("Выход");*/
+	cout << "Меню редактирования сессиии";
+}
+
+void Student::editRecordBook(string header)
+{
+	int selectedItem = -1;
+	Menu* sessionMenu = new Menu(header);
+	cout << endl << " _________Информация о сессиях:_________" << endl;
+	sessionMenu->addMenuItem("Выход");
+	for (int i = 0; i < 9; i++)
+	{
+		if (SN.recordBook[i][0].isEmpty == false)
+			break;
+		header = to_string(i+1) + "-я сессия";
+		sessionMenu->addMenuItem(header);
+	}
+	while (selectedItem != 0) {
+		//printInfo();
+		//cout << "\nНажмите любую клавишу\n";
+		//_getch();
+		selectedItem = sessionMenu->run();
+		setRecordBook(selectedItem);
+	}
+	delete sessionMenu;
+}
+
+void Student::printSessions()
+{
+	cout << endl << " _________Информация о сессиях:_________" << endl;
+	cout << " Фамилия: " << SN.surname << " Имя: " << SN.name << " Отчество: " << SN.patronymic << endl;
+	cout << " Факультет: " << SN.faculty << " Кафедра: " << SN.department << " Группа: " << SN.group << endl;
+	cout << " Номер зачетной книжки: " << SN.recordBookNumber << " День рождения: " << SN.birthDate << endl;
+	cout << " Пол: ";
+	if (SN.sex == Sex::male) { cout << "мужской "; }
+	if (SN.sex == Sex::female) { cout << "женский "; }
+	cout << " Год  начала обучения: " << SN.admissionYear << endl;
+}
+
+
+
 void Student::printInfo()
 {
 	cout << endl << " _________Информация о студенте:_________" << endl;
@@ -173,7 +225,6 @@ void Student::printInfo()
 	if (SN.sex == Sex::male) { cout << "мужской "; }
 	if (SN.sex == Sex::female) { cout << "женский "; }
 	cout << " Год  начала обучения: " <<  SN.admissionYear << endl;
-
 }
 
 void Student::editStudent()
@@ -233,7 +284,9 @@ void Student::editStudent()
 		case 10:
 			setSex("Меню редактирования пола");
 			break;
-
+		case 11:
+			editRecordBook("Меню редактирования сессии");
+			break;
 		deafault:
 			break;
 		}
