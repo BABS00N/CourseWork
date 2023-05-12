@@ -5,14 +5,18 @@
 #include "Student.h"
 #include "Menu.h"
 #include "EditData.h"
+#include "EditData.h"
 using namespace std;
 
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	//Student a;
-	//a.getShortInfoFromFile();
+	/*EditData b;
+	b.setLabel("Дата рождения:");
+	b.getData(editType::date, "01.01.1900", "01.01.2007");*/
+	Student a;
+	a.getShortInfoFromFile();
 	//a.editStudent();
 	//a.setDefaultData();
 	//a.addStudentToFile();
@@ -22,6 +26,6 @@ int main()
 	//a.addStudentToFile();
 	//a.deleteStudent(1);
 	//a.sortingStudentsByAdmissionYear();
-	Crypt();
-	Decrypt();
+	//Crypt();
+	//Decrypt();
 } 

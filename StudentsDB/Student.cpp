@@ -103,7 +103,7 @@ void Student::setBirthDate()
 	
 	edit->clear(SN.birthDate);
 	edit->setLabel("Введите дату рождения: ");
-	str = edit->getData(editType::all, 15);
+	str = edit->getData(editType::date, "01.01.1900","01.01.2007");
 	strncpy_s(SN.birthDate, str.c_str(), 10);
 }
 

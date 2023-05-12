@@ -6,7 +6,7 @@
 #include <Windows.h>
 using namespace std;
 
-enum class editType : char { onlyDigit, onlyLetter, all };
+enum class editType : char { onlyDigit, onlyLetter, all, date };
 
 class EditData
 {
@@ -19,17 +19,18 @@ private:
 	bool isLetter(char ch);
 	bool isSpace(char ch);
 	bool isSpecCharacter(char ch);
-	bool isDateString(string _str);
+	string reverseDate(string _date);
+	bool isDateTrue(string _date);
+	//bool isDateString(string _str);
 public:
 	//enum class editType : char { onlyDigit, olnyLetter, all };
 	
 	EditData();
 
-	void reverseDate(string & _date);
 	void clear(string _data = "");
 	void setLabel(string _label);
 	string getData(editType _type);
 	int getData(editType et, int min, int max);
 	string getData(editType et, int len);
-	string getData(string minDate, string maxDate);
+	string getData(editType et ,string minDate, string maxDate);
 };
