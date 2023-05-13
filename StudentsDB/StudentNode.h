@@ -13,6 +13,6 @@ struct StudentNode
 	char department[30];
 	char group[15];
 	char recordBookNumber[15];
-	//Subject recordBook[9][10];
+	Subject recordBook[9][10];
 	Sex sex;
 };

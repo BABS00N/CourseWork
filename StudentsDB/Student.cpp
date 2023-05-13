@@ -34,10 +34,10 @@ void Student::setDefaultData()
 	strncpy_s(SN.birthDate,"01.01.2004",15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2023;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 void Student::setDefaultData1()
 {
@@ -51,10 +51,10 @@ void Student::setDefaultData1()
 	strncpy_s(SN.birthDate, "61.61.2064", 15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2021;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 void Student::setDefaultData2()
 {
@@ -68,10 +68,10 @@ void Student::setDefaultData2()
 	strncpy_s(SN.birthDate, "31.31.2094", 15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 2022;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 
 void Student::setSurname()
@@ -253,10 +253,10 @@ void Student::clearStudentNode()
 	strncpy_s(SN.birthDate, "", 15);
 	SN.sex = Sex::male;
 	SN.admissionYear = 0;
-	/*for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
-		}*/
+		}
 }
 
 void Student::addStudentToFile()
