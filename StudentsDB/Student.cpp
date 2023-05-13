@@ -165,7 +165,7 @@ void Student::setRecordBookNumber()
 
 void Student::setRecordBook(string header)
 {
-	Menu* recordBookMenu = new Menu("Меню редактирования сессий");
+	Menu* recordBookMenu = new Menu(header);
 	string label;
 
 	recordBookMenu->addMenuItem("Выход");
@@ -183,6 +183,34 @@ void Student::setRecordBook(string header)
 		}
 	}
 	delete recordBookMenu;
+}
+
+void Student::setSessionByIndex(int index)
+{
+	string label;
+	label = "Меню редактирования " + to_string(index + 1) + "-й сессии";
+	Menu* sessionMenu = new Menu(label);
+
+	sessionMenu->addMenuItem("Выход");
+	for (int i = 0; i < 10; i++)
+	{
+		sessionMenu->addMenuItem(SN.recordBook[index][i].name);
+	}
+
+	int selectedItem = -1;
+	while (selectedItem != 0)
+	{
+		selectedItem = sessionMenu->run();
+		if (selectedItem == 0)
+			break;
+		SetSubjectByIndex(selectedItem);
+	}
+	delete sessionMenu;
+}
+
+void Student::SetSubjectByIndex(int index)
+{
+
 }
 
 void Student::printInfo()
@@ -256,7 +284,9 @@ void Student::editStudent()
 		case 10:
 			setSex("Меню редактирования пола");
 			break;
-
+		case 11:
+			setRecordBook("Меню редактирования сессий");
+			break;
 		deafault:
 			break;
 		}
