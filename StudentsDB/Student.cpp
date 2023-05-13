@@ -196,6 +196,19 @@ void Student::setSubjectMarkByIndex(int i_idx, int j_idx)
 	delete markMenu;
 }
 
+void Student::addSubjectByIndex(int i_idx, int j_idx)
+{
+	setSubjectNameByIndex(i_idx,j_idx);
+	setSubjectMarkByIndex(i_idx, j_idx);
+	SN.recordBook[i_idx][j_idx].isEmpty == false;
+}
+
+void Student::deleteSubjectByIndex(int i_idx, int j_idx)
+{
+	SN.recordBook[i_idx][j_idx].isEmpty = true;
+	strcpy_s(SN.recordBook[i_idx][j_idx].name, "");
+}
+
 void Student::setRecordBook(string header)
 {
 	Menu* recordBookMenu = new Menu(header);
@@ -220,9 +233,9 @@ void Student::setRecordBook(string header)
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
 			system("cls");
-			setRecordBook(header);
+			//setRecordBook(header);
 		}
-		setSessionByIndex(selectedItem);
+		else setSessionByIndex(selectedItem);
 	}
 	delete recordBookMenu;
 }
@@ -230,16 +243,18 @@ void Student::setRecordBook(string header)
 void Student::setSessionByIndex(int index)
 {
 	string label;
-	label = "Меню редактирования " + to_string(index + 1) + "-й сессии";
+	label = "Меню редактирования " + to_string(index) + "-й сессии";
 	Menu* sessionMenu = new Menu(label);
 
 	sessionMenu->addMenuItem("Выход");
 	sessionMenu->addMenuItem("Добавить предмет");
-	for (int i = 0; i < 10; i++)
-	{	//if (SN.recordBook[index][0].isEmpty)
-			//break;
+	int i = 0;
+	for (; i < 10; i++)
+	{	if (SN.recordBook[index][i].isEmpty)
+			break;
 		sessionMenu->addMenuItem(SN.recordBook[index][i].name);
 	}
+	
 
 	int selectedItem = -1;
 	while (selectedItem != 0)
@@ -247,15 +262,21 @@ void Student::setSessionByIndex(int index)
 		selectedItem = sessionMenu->run();
 		if (selectedItem == 0)
 			break;
-		if (not(0 < selectedItem and selectedItem <= 10))
+		if (selectedItem == 1)
+		{
+			addSubjectByIndex(index, i);
+			system("cls");
+			//setSessionByIndex(index-1);
+		}
+		else if (not(1 < selectedItem and selectedItem <= 10))
 		{
 			cout << endl << "Ошибка: предмет, под указанным номером: " << selectedItem << ", не существует";
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
 			system("cls");
-			setSessionByIndex(index);
+			//setSessionByIndex(index-1);
 		}
-		SetSubjectByIndex(index, selectedItem-1);
+		else SetSubjectByIndex(index, selectedItem-1);
 	}
 	delete sessionMenu;
 }
