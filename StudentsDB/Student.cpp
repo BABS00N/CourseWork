@@ -163,6 +163,28 @@ void Student::setRecordBookNumber()
 	strncpy_s(SN.recordBookNumber, str.c_str(), str.size());
 }
 
+void Student::setRecordBook(string header)
+{
+	Menu* recordBookMenu = new Menu("Меню редактирования сессий");
+	string label;
+
+	recordBookMenu->addMenuItem("Выход");
+	for (int i = 0; i < 10; i++)
+	{
+		label = to_string(i + 1) + "-я сессия";
+		recordBookMenu->addMenuItem(label);
+		int selectedItem = -1;
+		while (selectedItem != 0)
+		{
+			selectedItem = recordBookMenu->run();
+			if (selectedItem == 0)
+				break;
+			setSessionByIndex(selectedItem);
+		}
+	}
+	delete recordBookMenu;
+}
+
 void Student::printInfo()
 {
 	cout << endl << " _________Информация о студенте:_________" << endl;
@@ -196,7 +218,8 @@ void Student::editStudent()
 	
 	studMenu->addMenuItem("Просмотреть/Введите успеваемость");
 	int selectedItem = -1;
-	while (selectedItem != 0) {
+	while (selectedItem != 0)
+	{
 		printInfo();
 		cout << "\nНажмите любую клавишу\n";
 		_getch();
@@ -289,9 +312,9 @@ void Student::getShortInfoFromFile()
 		cout << i << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
 	}
 	fclose(binaryFile);
-	cout << "\nНажмиту любую клавишу\n";
-	_getch();
-	edit->clear();
+	cout << endl;
+	//_getch();
+	//edit->clear();
 	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
 	int num = edit->getData(editType::onlyDigit, 0, size);
 	edit->clear();

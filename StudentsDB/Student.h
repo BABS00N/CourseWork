@@ -35,7 +35,13 @@ public:
 	void setDepartment();
 	void setGroup();
 	void setRecordBookNumber();
-	//void setRecordBook(); 
+	void setSubjectNameByIndex(int i_idx, int j_idx);
+	void setSubjectMarkByIndex(int i_idx, int j_idx);
+
+	void setRecordBook(string header); 
+	void setSessionByIndex(int index);
+	void SetSubjectByIndex(int index);
+
 
 	void setDefaultData();
 	void printInfo();
