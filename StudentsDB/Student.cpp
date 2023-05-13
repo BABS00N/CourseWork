@@ -200,26 +200,27 @@ void Student::setRecordBook(string header)
 	string label;
 
 	recordBookMenu->addMenuItem("Выход");
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		label = to_string(i + 1) + "-я сессия";
 		recordBookMenu->addMenuItem(label);
-		int selectedItem = -1;
-		while (selectedItem != 0)
+	}
+
+	int selectedItem = -1;
+	while (selectedItem != 0)
+	{
+		selectedItem = recordBookMenu->run();
+		if (selectedItem == 0)
+			break;
+		if (not(0 < selectedItem and selectedItem <= 9))
 		{
-			selectedItem = recordBookMenu->run();
-			if (selectedItem == 0)
-				break;
-			if (not(0 < selectedItem and selectedItem <= 9))
-			{
-				cout << endl <<"Ошибка: сессия, под указанным номером: " << selectedItem << ", не существует";
-				cout << "\nНажмите любую клавишу\n";
-				_getch();
-				system("cls");
-				setRecordBook(header);
-			}
-			setSessionByIndex(selectedItem);
+			cout << endl << "Ошибка: сессия, под указанным номером: " << selectedItem << ", не существует";
+			cout << "\nНажмите любую клавишу\n";
+			_getch();
+			system("cls");
+			setRecordBook(header);
 		}
+		setSessionByIndex(selectedItem);
 	}
 	delete recordBookMenu;
 }
@@ -231,8 +232,10 @@ void Student::setSessionByIndex(int index)
 	Menu* sessionMenu = new Menu(label);
 
 	sessionMenu->addMenuItem("Выход");
+	sessionMenu->addMenuItem("Добавить предмет");
 	for (int i = 0; i < 10; i++)
-	{
+	{	//if (SN.recordBook[index][0].isEmpty)
+			//break;
 		sessionMenu->addMenuItem(SN.recordBook[index][i].name);
 	}
 
@@ -250,7 +253,7 @@ void Student::setSessionByIndex(int index)
 			system("cls");
 			setSessionByIndex(index);
 		}
-		SetSubjectByIndex(index, selectedItem);
+		SetSubjectByIndex(index, selectedItem-1);
 	}
 	delete sessionMenu;
 }
@@ -264,6 +267,11 @@ void Student::SetSubjectByIndex(int i_idx, int j_idx)
 	int selectedItem = -1;
 	while (selectedItem != 0)
 	{
+		system("cls");
+		printSubjectInfoByIndex(i_idx,j_idx);
+		cout << "\n Нажмите любую клавишу\n";
+		_getch();
+		system("cls");
 		selectedItem = subjectMenu->run();
 		if (selectedItem == 0)
 			break;
@@ -287,6 +295,37 @@ void Student::SetSubjectByIndex(int i_idx, int j_idx)
 		}
 	}
 	delete subjectMenu;
+}
+
+void Student::printSubjectInfoByIndex(int i_idx, int j_idx)
+{
+	cout << endl << " Информация о предмете:" << endl;
+	cout << " Название: " << SN.recordBook[i_idx][j_idx].name << endl;
+	cout << " Оценка: ";
+	switch (SN.recordBook[i_idx][j_idx].mark)
+	{
+	case markType::Pass:
+		cout << "зачёт";
+		break;
+	case markType::Fail:
+		cout << "незачёт";
+		break;
+	case markType::Excellent:
+		cout << "отлично";
+		break;
+	case markType::Good:
+		cout << "хорошо";
+		break;
+	case markType::Satisfactory:
+		cout << "удовлетворительно";
+		break;
+	case markType::Bad:
+		cout << "неудовлетворительно";
+		break;
+	default:
+		break;
+	}
+	cout << "\n Сессия: " << i_idx << endl;
 }
 
 void Student::printInfo()

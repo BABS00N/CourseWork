@@ -37,6 +37,8 @@ public:
 	void setRecordBookNumber();
 	void setSubjectNameByIndex(int i_idx, int j_idx);
 	void setSubjectMarkByIndex(int i_idx, int j_idx);
+	void addSubjectByIndex(int i_idx, int j_idx);
+	void deleteSubjectByIndex(int i_idx, int j_idx);
 
 	void setRecordBook(string header); 
 	void setSessionByIndex(int index);
@@ -44,6 +46,8 @@ public:
 
 
 	void setDefaultData();
+
+	void printSubjectInfoByIndex(int i_idx, int j_idx);
 	void printInfo();
 	void editStudent();
 	void clearStudentNode();
