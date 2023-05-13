@@ -475,32 +475,44 @@ int Student::countRecords()
 
 void Student::getShortInfoFromFile()
 {
-	system("cls");
-	cout << "Список данных о студентах: " << endl;
-	int size = countRecords();
-	FILE* binaryFile;
-	fopen_s(&binaryFile, fileName.c_str(), "r");
 	int i = 0;
-	for (; i < size; i++) {
-		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
-		cout << i << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
-	}
-	fclose(binaryFile);
-	cout << i <<") Добавить студента" << endl;
-	//_getch();
-	//edit->clear();
-	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
-	int num = edit->getData(editType::onlyDigit, 0, size);
-	if (num == i)
+	int num = -1;
+	while (num != i)
 	{
-		setStudentNode();
-		addStudentToFile();
-		getShortInfoFromFile();
+		i = 0;
+		system("cls");
+		cout << "Список данных о студентах: " << endl;
+		int size = countRecords();
+		FILE* binaryFile;
+		fopen_s(&binaryFile, fileName.c_str(), "r");
+
+		for (; i < size; i++) {
+			fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
+			cout << i << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
+		}
+		fclose(binaryFile);
+		cout << i << ") Добавить студента" << endl;
+		cout << i + 1 << ") Выход" << endl;
+		//_getch();
+		//edit->clear();
+		edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
+		num = edit->getData(editType::onlyDigit, 0, size+1);
+		if (num == i)
+		{
+			setStudentNode();
+			addStudentToFile();
+			getShortInfoFromFile();
+		}
+		else if (num != i + 1)
+		{
+			edit->clear();
+			setStudentNodeFromFile(num);
+			editStudent(num);
+			writeToFileStudentData(num);
+		}
+		else if (num = i + 1)
+			return;
 	}
-	edit->clear();
-	setStudentNodeFromFile(num);
-	editStudent(num);
-	writeToFileStudentData(num);
 }
 
 void Student::getShortInfoFromFile(string minYear, string maxYear)
