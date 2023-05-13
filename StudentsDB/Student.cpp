@@ -179,6 +179,13 @@ void Student::setRecordBook(string header)
 			selectedItem = recordBookMenu->run();
 			if (selectedItem == 0)
 				break;
+			if (not(0 < selectedItem and selectedItem <= 9))
+			{
+				cout << endl <<"Ошибка: сессия, под указанным номером: " << selectedItem << ", не существует";
+				cout << "\nНажмите любую клавишу\n";
+				_getch();
+				setRecordBook(header);
+			}
 			setSessionByIndex(selectedItem);
 		}
 	}
@@ -203,14 +210,49 @@ void Student::setSessionByIndex(int index)
 		selectedItem = sessionMenu->run();
 		if (selectedItem == 0)
 			break;
-		SetSubjectByIndex(selectedItem);
+		if (not(0 < selectedItem and selectedItem <= 10))
+		{
+			cout << endl << "Ошибка: предмет, под указанным номером: " << selectedItem << ", не существует";
+			cout << "\nНажмите любую клавишу\n";
+			_getch();
+			setSessionByIndex(index);
+		}
+		SetSubjectByIndex(index, selectedItem);
 	}
 	delete sessionMenu;
 }
 
-void Student::SetSubjectByIndex(int index)
+void Student::SetSubjectByIndex(int i_idx, int j_idx)
 {
-
+	Menu* subjectMenu = new Menu("Меню редактирования предмета");
+	subjectMenu->addMenuItem("Выход");
+	subjectMenu->addMenuItem("Изменить название");
+	subjectMenu->addMenuItem("Изменить оценку");
+	int selectedItem = -1;
+	while (selectedItem != 0)
+	{
+		selectedItem = subjectMenu->run();
+		if (selectedItem == 0)
+			break;
+		if (not(0 < selectedItem and selectedItem <= 2))
+		{
+			cout << endl << "Ошибка: Введенное число: "<< selectedItem << "должно быть в диапазоне [0;2]";
+			cout << "\nНажмите любую клавишу\n";
+			_getch();
+			SetSubjectByIndex(i_idx,j_idx);
+		}
+		if (selectedItem == 1)
+		{
+			setSubjectNameByIndex(i_idx,j_idx);
+			selectedItem = 0;
+		}
+		if (selectedItem == 2)
+		{
+			setSubjectMarkByIndex(i_idx, j_idx);
+			selectedItem = 0;
+		}
+	}
+	delete subjectMenu;
 }
 
 void Student::printInfo()

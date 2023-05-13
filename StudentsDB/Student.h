@@ -40,7 +40,7 @@ public:
 
 	void setRecordBook(string header); 
 	void setSessionByIndex(int index);
-	void SetSubjectByIndex(int index);
+	void SetSubjectByIndex(int i_idx, int j_idx);
 
 
 	void setDefaultData();
