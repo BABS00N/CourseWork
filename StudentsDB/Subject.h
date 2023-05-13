@@ -10,5 +10,5 @@ struct Subject
 	markType mark;
 	bool isEmpty;
 
-};
+}; 
 
