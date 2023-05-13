@@ -163,6 +163,37 @@ void Student::setRecordBookNumber()
 	strncpy_s(SN.recordBookNumber, str.c_str(), str.size());
 }
 
+void Student::setSubjectNameByIndex(int i_idx, int j_idx)
+{
+	edit->clear(SN.recordBook[i_idx][j_idx].name);
+	edit->setLabel("Введите название предмета: ");
+	str = edit->getData(editType::all, 50).c_str();
+	strncpy_s(SN.recordBook[i_idx][j_idx].name, str.c_str(), str.size());
+}
+
+void Student::setSubjectMarkByIndex(int i_idx, int j_idx)
+{
+	Menu* markMenu = new Menu("Меню редактирования оценки");
+	markMenu->addMenuItem("Выход");
+	markMenu->addMenuItem("Зачет");
+	markMenu->addMenuItem("Незачет");
+	markMenu->addMenuItem("Отлично");
+	markMenu->addMenuItem("Хорошо");
+	markMenu->addMenuItem("Удовлетворительно");
+	markMenu->addMenuItem("Плохо");
+	int selectedItem = -1;
+	while (selectedItem != 0) {
+		selectedItem = markMenu->run();
+		if (selectedItem == 1) { SN.recordBook[i_idx][j_idx].mark = markType::Pass; selectedItem = 0; }
+		if (selectedItem == 2) { SN.recordBook[i_idx][j_idx].mark = markType::Fail; selectedItem = 0; }
+		if (selectedItem == 3) { SN.recordBook[i_idx][j_idx].mark = markType::Excellent; selectedItem = 0; }
+		if (selectedItem == 4) { SN.recordBook[i_idx][j_idx].mark = markType::Good; selectedItem = 0; }
+		if (selectedItem == 5) { SN.recordBook[i_idx][j_idx].mark = markType::Satisfactory; selectedItem = 0; }
+		if (selectedItem == 6) { SN.recordBook[i_idx][j_idx].mark = markType::Bad; selectedItem = 0; }
+	}
+	delete markMenu;
+}
+
 void Student::setRecordBook(string header)
 {
 	Menu* recordBookMenu = new Menu(header);
@@ -184,6 +215,7 @@ void Student::setRecordBook(string header)
 				cout << endl <<"Ошибка: сессия, под указанным номером: " << selectedItem << ", не существует";
 				cout << "\nНажмите любую клавишу\n";
 				_getch();
+				system("cls");
 				setRecordBook(header);
 			}
 			setSessionByIndex(selectedItem);
@@ -215,6 +247,7 @@ void Student::setSessionByIndex(int index)
 			cout << endl << "Ошибка: предмет, под указанным номером: " << selectedItem << ", не существует";
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
+			system("cls");
 			setSessionByIndex(index);
 		}
 		SetSubjectByIndex(index, selectedItem);
@@ -239,6 +272,7 @@ void Student::SetSubjectByIndex(int i_idx, int j_idx)
 			cout << endl << "Ошибка: Введенное число: "<< selectedItem << "должно быть в диапазоне [0;2]";
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
+			system("cls");
 			SetSubjectByIndex(i_idx,j_idx);
 		}
 		if (selectedItem == 1)
