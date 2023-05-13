@@ -49,7 +49,7 @@ public:
 
 	void printSubjectInfoByIndex(int i_idx, int j_idx);
 	void printInfo();
-	void editStudent();
+	void editStudent(int num);
 	void clearStudentNode();
 
 	void addStudentToFile();

@@ -150,7 +150,7 @@ void Student::setGroup()
 {
 	
 	edit->clear(SN.group); edit->setLabel("Введите номер группы: ");
-	str = edit->getData(editType::onlyLetter, 15).c_str();
+	str = edit->getData(editType::all, 15).c_str();
 	strncpy_s(SN.group, str.c_str(), str.size());
 }
 
@@ -169,6 +169,7 @@ void Student::setSubjectNameByIndex(int i_idx, int j_idx)
 	edit->setLabel("Введите название предмета: ");
 	str = edit->getData(editType::all, 50).c_str();
 	strncpy_s(SN.recordBook[i_idx][j_idx].name, str.c_str(), str.size());
+	SN.recordBook[i_idx][j_idx].isEmpty = false;
 }
 
 void Student::setSubjectMarkByIndex(int i_idx, int j_idx)
@@ -190,6 +191,7 @@ void Student::setSubjectMarkByIndex(int i_idx, int j_idx)
 		if (selectedItem == 4) { SN.recordBook[i_idx][j_idx].mark = markType::Good; selectedItem = 0; }
 		if (selectedItem == 5) { SN.recordBook[i_idx][j_idx].mark = markType::Satisfactory; selectedItem = 0; }
 		if (selectedItem == 6) { SN.recordBook[i_idx][j_idx].mark = markType::Bad; selectedItem = 0; }
+		SN.recordBook[i_idx][j_idx].isEmpty = false;
 	}
 	delete markMenu;
 }
@@ -341,7 +343,7 @@ void Student::printInfo()
 
 }
 
-void Student::editStudent()
+void Student::editStudent(int num)
 {
 	Menu* studMenu = new Menu("Меню редактирования студента");
 
@@ -360,6 +362,8 @@ void Student::editStudent()
 	studMenu->addMenuItem("Введите пол");
 	
 	studMenu->addMenuItem("Просмотреть/Введите успеваемость");
+
+	studMenu->addMenuItem("Удалить студента");
 	int selectedItem = -1;
 	while (selectedItem != 0)
 	{
@@ -401,6 +405,9 @@ void Student::editStudent()
 			break;
 		case 11:
 			setRecordBook("Меню редактирования сессий");
+			break;
+		case 12:
+			deleteStudentFromFile(num);
 			break;
 		deafault:
 			break;
@@ -452,19 +459,26 @@ void Student::getShortInfoFromFile()
 	int size = countRecords();
 	FILE* binaryFile;
 	fopen_s(&binaryFile, fileName.c_str(), "r");
-	for (int i = 0; i < size; i++) {
+	int i = 0;
+	for (; i < size; i++) {
 		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
 		cout << i << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
 	}
 	fclose(binaryFile);
-	cout << endl;
+	cout << i <<") Добавить студента" << endl;
 	//_getch();
 	//edit->clear();
 	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
 	int num = edit->getData(editType::onlyDigit, 0, size);
+	if (num == i)
+	{
+		setStudentNode();
+		addStudentToFile();
+		getShortInfoFromFile();
+	}
 	edit->clear();
 	setStudentNodeFromFile(num);
-	editStudent();
+	editStudent(num);
 	writeToFileStudentData(num);
 }
 
@@ -496,7 +510,7 @@ void Student::getShortInfoFromFile(string minYear, string maxYear)
 	int num = edit->getData(editType::onlyDigit, 0, size);
 	edit->clear();
 	setStudentNodeFromFile(num);
-	editStudent();
+	editStudent(num);
 	writeToFileStudentData(num);
 }
 
