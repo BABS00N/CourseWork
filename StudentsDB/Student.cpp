@@ -635,7 +635,7 @@ void Student::setBirhDateInterval(int& minDate, int& maxDate)
 	minDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
 	cout << "\nУкажите максимальный год рождения" << endl;
-	minDate = edit->getData(editType::onlyDigit, 1900, 2007);
+	maxDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
 	system("cls");
 }
@@ -672,9 +672,7 @@ void Student::sortingStudentsMenu()
 
 void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate)
 {
-	string strDate = SN.birthDate;
-	strDate = strDate.substr(6,4);
-	int date = atoi(strDate.c_str());
+	
 
 	int countItems = countRecords();
 	
@@ -682,6 +680,9 @@ void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate)
 	for (int i = 0; i < countItems; i++)
 	{
 		setStudentNodeFromFile(i);
+		string strDate = SN.birthDate;
+		strDate = strDate.substr(6, 4);
+		int date = atoi(strDate.c_str());
 		if (minDate <= date and date <= maxDate)
 		{
 			cout << i << ") " << SN.surname << " " << SN.name 
