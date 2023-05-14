@@ -644,7 +644,7 @@ void Student::sortingStudentsMenu()
 			setBirhDateInterval(minDate,maxDate);
 			break;
 		case 2:
-			bubbleSorting();
+			sortingStudentsByAdmissionYear(minDate, maxDate);
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
 			system("cls");
