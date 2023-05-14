@@ -492,7 +492,8 @@ void Student::getShortInfoFromFile()
 		}
 		fclose(binaryFile);
 		cout << i << ") Добавить студента" << endl;
-		cout << i + 1 << ") Выход" << endl;
+		cout << i + 1 << ") Сортировать список" << endl;
+		cout << i + 2 << ") Выход" << endl;
 		//_getch();
 		//edit->clear();
 		edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
@@ -503,6 +504,10 @@ void Student::getShortInfoFromFile()
 			addStudentToFile();
 			getShortInfoFromFile();
 		}
+		else if (true)
+		{
+
+		}
 		else if (num != i + 1)
 		{
 			edit->clear();
@@ -510,7 +515,7 @@ void Student::getShortInfoFromFile()
 			editStudent(num);
 			writeToFileStudentData(num);
 		}
-		else if (num = i + 1)
+		else if (num = i + 2)
 			return;
 	}
 }
@@ -612,29 +617,82 @@ void Student::deleteStudentFromFile(int num)
 	rename("tmp.txt", fileName.c_str());
 }
 
-void Student::sortingStudentsByAdmissionYear()
+void Student::setBirhDateInterval(string& minDate, string& maxDate)
 {
+	cout << "Укажите минимальный года рождения" << endl;
+	minDate = edit->getData(editType::date, "01.01.1900", "01.01.2007");
+	cout << "Укажите максимальный года рождения" << endl;
+	minDate = edit->getData(editType::date, "01.01.1900", "01.01.2007");
+	system("cls");
+}
+
+void Student::sortingStudentsMenu()
+{
+	Menu* sortMenu = new Menu();
+	sortMenu->addMenuItem("Выход");
+	sortMenu->addMenuItem("Указать интервал года рождения");
+	sortMenu->addMenuItem("Сортировать");
+	int selectedItem = -1;
+	string minDate = "01.01.1900", maxDate = "01.01.2007";
+	while (selectedItem != 0)
+	{
+		selectedItem = sortMenu->run();
+		switch (selectedItem)
+		{
+		case 1:
+			system("cls");
+			setBirhDateInterval(minDate,maxDate);
+			break;
+		case 2:
+			bubbleSorting();
+			cout << "\nНажмите любую клавишу\n";
+			_getch();
+			system("cls");
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Student::sortingStudentsByAdmissionYear(string minDate, string maxDate)
+{
+	SuitableItem SI;
+
 	int countItems = countRecords();
-	List<StudentNode> studentList;
+	List<SuitableItem> studentsList;
 	for (int i = 0; i < countItems; i++)
 	{
 		setStudentNodeFromFile(i);
-		studentList.pushBack(SN);
+		if (minDate <= edit->reverseDate(SN.birthDate) and
+			edit->reverseDate(SN.birthDate) <= maxDate)
+		{
+			SI.index = i;
+			SI.student = SN;
+			studentsList.pushBack(SI);
+		};
 	}
-	
+
+	bubbleSorting(studentsList);
+}
+
+void Student::bubbleSorting(List<SuitableItem> studentsList)
+{
+	int countItems = studentsList.getSize();
+
 	for (int i = 0; i < countItems; i++) {
 		for (int j = 0; j < countItems - 1; j++) {
-			if (studentList[j].admissionYear < studentList[j + 1].admissionYear) {
-				StudentNode tmp = studentList[j];
-				studentList[j] = studentList[j + 1];
-				studentList[j + 1] = tmp;
+			if (studentsList[j].student.admissionYear < studentsList[j + 1].student.admissionYear) {
+				SuitableItem tmp = studentsList[j];
+				studentsList[j] = studentsList[j + 1];
+				studentsList[j + 1] = tmp;
 			}
 		}
 	}
 
 	for (int i = 0; i < countItems; i++)
 	{
-		SN = studentList[i];
+		SN = studentsList[i].student;
 		deleteStudentFromFile(0);
 		addStudentToFile();
 	}

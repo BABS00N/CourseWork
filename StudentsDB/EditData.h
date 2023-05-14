@@ -19,11 +19,11 @@ private:
 	bool isLetter(char ch);
 	bool isSpace(char ch);
 	bool isSpecCharacter(char ch);
-	string reverseDate(string _date);
+	
 	bool isDateTrue(string _date);
 	//bool isDateString(string _str);
 public:
-	//enum class editType : char { onlyDigit, olnyLetter, all };
+	string reverseDate(string _date);
 	
 	EditData();
 

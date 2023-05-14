@@ -11,6 +11,12 @@
 
 using namespace std;
 
+struct SuitableItem
+{
+	StudentNode student;
+	int index;
+};
+
 class Student
 {
 private:
@@ -44,7 +50,6 @@ public:
 	void setSessionByIndex(int index);
 	void SetSubjectByIndex(int i_idx, int j_idx);
 
-
 	void setDefaultData();
 
 	void printSubjectInfoByIndex(int i_idx, int j_idx);
@@ -61,5 +66,8 @@ public:
 	void writeToFileStudentData(int num);
 	void deleteStudentFromFile(int num);
 
-	void sortingStudentsByAdmissionYear();
+	void setBirhDateInterval(string& minDate, string& maxDate);
+	void sortingStudentsMenu();
+	void sortingStudentsByAdmissionYear(string minDate,string maxDate);
+	void bubbleSorting(List<SuitableItem> studentList);
 };
