@@ -99,7 +99,7 @@ void Student::setDepartment()
 {
 	
 	edit->clear(SN.department); edit->setLabel("Введите кафедру: ");
-	str = edit->getData(editType::onlyLetter, 30).c_str();
+	str = edit->getData(editType::all, 30).c_str();
 	strncpy_s(SN.department, str.c_str(), str.size());
 }
 
@@ -512,6 +512,7 @@ void Student::setStudentNode()
 	setGroup();
 	setRecordBookNumber();
 	setSex("Меню добавления пола");
+	edit->clear();
 }
 
 void Student::setStudentNodeFromFile(int num)
