@@ -10,7 +10,7 @@
   <Class Name="Student">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EBIAAQAIQAAEQUACBEAAAIgAUIAgLAhSA0AARgAAIKA=</HashCode>
+      <HashCode>EBIAAQAIQAAEQEACBEAAAIgAUIAgLAhSAkAARgAAIKA=</HashCode>
       <FileName>Student.h</FileName>
     </TypeIdentifier>
   </Class>

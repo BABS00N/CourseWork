@@ -467,38 +467,6 @@ void Student::getShortInfoFromFile()
 	}
 }
 
-void Student::getShortInfoFromFile(string minYear, string maxYear)
-{
-	system("cls");
-	cout << "Список данных о студентах с интервалом года рождения "<< minYear << "-"<< maxYear <<": " << endl;
-	int size = countRecords();
-	FILE* binaryFile;
-	fopen_s(&binaryFile, fileName.c_str(), "r");
-
-	int idOfSortedElements = 0;
-	string birthYear;
-	for (int i = 0; i < size; i++) {
-		fread_s(&SN, sizeof(SN), sizeof(SN), 1, binaryFile);
-		birthYear.substr(6,9);
-		if (minYear <= birthYear and birthYear <= maxYear)
-		{
-			cout << idOfSortedElements << ") " << SN.surname << " " << SN.name << " " << SN.patronymic << " " << SN.group << endl;
-
-		}
-	}
-
-	fclose(binaryFile);
-	cout << "\nНажмиту любую клавишу\n";
-	_getch();
-	edit->clear();
-	edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
-	int num = edit->getData(editType::onlyDigit, 0, size);
-	edit->clear();
-	setStudentNodeFromFile(num);
-	editStudent(num);
-	writeToFileStudentData(num);
-}
-
 void Student::setStudentNode()
 {
 	setDefaultData();

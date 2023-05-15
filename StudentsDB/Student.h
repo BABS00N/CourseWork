@@ -47,7 +47,6 @@ public:
 	void addStudentToFile();
 	int countRecords();
 	void getShortInfoFromFile();
-	void getShortInfoFromFile(string minYear, string maxYear);
 	void setStudentNode();
 	void setStudentNodeFromFile(int num);
 	void writeToFileStudentData(int num);
