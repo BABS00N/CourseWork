@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include "StudentNode.h"
 #include "List.h"
-//#include "CryptoTools.h"
 
 using namespace std;
 
@@ -17,13 +16,10 @@ private:
 	string fileName;
 	EditData* edit;
 	StudentNode SN;
-	template <typename T>
-	void swap(T& a, T& b);
 public:
 	Student();
 	~Student();
-	void setDefaultData1();//удвлить
-	void setDefaultData2();//удалить
+	void setDefaultData();
 
 	void setSurname();
 	void setName();
@@ -44,12 +40,9 @@ public:
 	void setSessionByIndex(int index);
 	void SetSubjectByIndex(int i_idx, int j_idx);
 
-	void setDefaultData();
-
 	void printSubjectInfoByIndex(int i_idx, int j_idx);
 	void printInfo();
 	void editStudent(int num);
-	void clearStudentNode();
 
 	void addStudentToFile();
 	int countRecords();

@@ -2,15 +2,6 @@
 
 string str;
 
-template<typename T>
-inline void Student::swap(T& a, T& b)
-{
-	T temp;
-	temp = a;
-	a = b;
-	b = temp;
-}
-
 Student::Student()
 {
 	fileName = "database.bin";
@@ -24,50 +15,16 @@ Student::~Student()
 
 void Student::setDefaultData()
 {
-	strncpy_s(SN.surname, "Иванов", 30);
-	strncpy_s(SN.name, "Иван", 30);
-	strncpy_s(SN.patronymic, "Иванович", 30);
-	strncpy_s( SN.faculty, "ИКБ", 30);
-	strncpy_s( SN.department, "Информационная безопасность", 30);
-	strncpy_s( SN.group, "БББО-05-22", 15);
-	strncpy_s( SN.recordBookNumber, "123456789", 15);
-	strncpy_s(SN.birthDate,"01.01.2004",15);
+	strncpy_s(SN.surname, "", 30);
+	strncpy_s(SN.name, "", 30);
+	strncpy_s(SN.patronymic, "", 30);
+	strncpy_s(SN.faculty, "", 30);
+	strncpy_s(SN.department, "", 30);
+	strncpy_s(SN.group, "", 15);
+	strncpy_s(SN.recordBookNumber, "", 15);
+	strncpy_s(SN.birthDate, "", 15);
 	SN.sex = Sex::male;
-	SN.admissionYear = 2023;
-	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 10; j++) {
-			SN.recordBook[i][j].isEmpty = true;
-		}
-}
-void Student::setDefaultData1()
-{
-	strncpy_s(SN.surname, "Жумайев", 30);
-	strncpy_s(SN.name, "Жумай", 30);
-	strncpy_s(SN.patronymic, "Жумайевич", 30);
-	strncpy_s(SN.faculty, "ИИБ", 30);
-	strncpy_s(SN.department, "Информабубубубпасность", 30);
-	strncpy_s(SN.group, "БСБО-01-22", 15);
-	strncpy_s(SN.recordBookNumber, "3756454", 15);
-	strncpy_s(SN.birthDate, "61.61.2064", 15);
-	SN.sex = Sex::male;
-	SN.admissionYear = 2021;
-	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 10; j++) {
-			SN.recordBook[i][j].isEmpty = true;
-		}
-}
-void Student::setDefaultData2()
-{
-	strncpy_s(SN.surname, "Денидиираимон", 30);
-	strncpy_s(SN.name, "Денидиираимон", 30);
-	strncpy_s(SN.patronymic, "Денидиираимон", 30);
-	strncpy_s(SN.faculty, "ИИТХКБ", 30);
-	strncpy_s(SN.department, "Химя", 30);
-	strncpy_s(SN.group, "ИНБО-15-27", 15);
-	strncpy_s(SN.recordBookNumber, "134143143789", 15);
-	strncpy_s(SN.birthDate, "31.31.2094", 15);
-	SN.sex = Sex::male;
-	SN.admissionYear = 2022;
+	SN.admissionYear = 0;
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 10; j++) {
 			SN.recordBook[i][j].isEmpty = true;
@@ -148,7 +105,6 @@ void Student::setDepartment()
 
 void Student::setGroup()
 {
-	
 	edit->clear(SN.group); edit->setLabel("Введите номер группы: ");
 	str = edit->getData(editType::all, 15).c_str();
 	strncpy_s(SN.group, str.c_str(), str.size());
@@ -254,7 +210,6 @@ void Student::setSessionByIndex(int index)
 			break;
 		sessionMenu->addMenuItem(SN.recordBook[index][i].name);
 	}
-	
 
 	int selectedItem = -1;
 	while (selectedItem != 0)
@@ -274,7 +229,6 @@ void Student::setSessionByIndex(int index)
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
 			system("cls");
-			//setSessionByIndex(index-1);
 		}
 		else SetSubjectByIndex(index, selectedItem-1);
 	}
@@ -437,24 +391,6 @@ void Student::editStudent(int num)
 	delete studMenu;
 }
 
-void Student::clearStudentNode()
-{
-	strncpy_s(SN.surname, "", 30);
-	strncpy_s(SN.name, "", 30);
-	strncpy_s(SN.patronymic, "", 30);
-	strncpy_s(SN.faculty, "", 30);
-	strncpy_s(SN.department, "", 30);
-	strncpy_s(SN.group, "", 15);
-	strncpy_s(SN.recordBookNumber, "", 15);
-	strncpy_s(SN.birthDate, "", 15);
-	SN.sex = Sex::male;
-	SN.admissionYear = 0;
-	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 10; j++) {
-			SN.recordBook[i][j].isEmpty = true;
-		}
-}
-
 void Student::addStudentToFile()
 {
 	FILE* binaryFile;
@@ -503,7 +439,6 @@ void Student::getShortInfoFromFile()
 		{
 			setStudentNode();
 			addStudentToFile();
-			//getShortInfoFromFile();
 			num = -1;
 		}
 		else if (num == i+1)
@@ -566,7 +501,7 @@ void Student::getShortInfoFromFile(string minYear, string maxYear)
 
 void Student::setStudentNode()
 {
-	clearStudentNode();
+	setDefaultData();
 	setSurname();
 	setName();
 	setPatronymic();
@@ -577,7 +512,6 @@ void Student::setStudentNode()
 	setGroup();
 	setRecordBookNumber();
 	setSex("Меню добавления пола");
-	//setRecordBook();
 }
 
 void Student::setStudentNodeFromFile(int num)
@@ -672,10 +606,7 @@ void Student::sortingStudentsMenu()
 
 void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate)
 {
-	
-
 	int countItems = countRecords();
-	
 	cout << "Список студентов в интервале года рождения ("<<minDate<<";"<<maxDate<<")"<<endl;
 	for (int i = 0; i < countItems; i++)
 	{

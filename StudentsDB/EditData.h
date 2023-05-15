@@ -21,7 +21,6 @@ private:
 	bool isSpecCharacter(char ch);
 	
 	bool isDateTrue(string _date);
-	//bool isDateString(string _str);
 public:
 	string reverseDate(string _date);
 	
