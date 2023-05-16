@@ -20,6 +20,7 @@ public:
 	Student();
 	~Student();
 	void setDefaultData();
+	void setDef();
 
 	void setSurname();
 	void setName();

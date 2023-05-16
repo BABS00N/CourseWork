@@ -31,6 +31,19 @@ void Student::setDefaultData()
 		}
 }
 
+void Student::setDef()
+{
+	for (int i = 1; i < 5; i++) {
+		str = "Заглушков " + i;
+		strncpy_s(SN.surname, str.c_str(), str.size());
+		str = "Заглушка " + i;
+		strncpy_s(SN.name, str.c_str(), str.size());
+		str = "Заглушкович " + i;
+		strncpy_s(SN.patronymic, str.c_str(), str.size());
+		addStudentToFile();
+	}
+}
+
 void Student::setSurname()
 {
 	
@@ -126,7 +139,7 @@ void Student::setSubjectNameByIndex(int i_idx, int j_idx)
 {
 	edit->clear(SN.recordBook[i_idx][j_idx].name);
 	edit->setLabel("Введите название предмета: ");
-	str = edit->getData(editType::all, 50).c_str();
+	str = edit->getData(editType::all, 15).c_str();
 	strncpy_s(SN.recordBook[i_idx][j_idx].name, str.c_str(), str.size());
 	SN.recordBook[i_idx][j_idx].isEmpty = false;
 }
@@ -346,6 +359,7 @@ void Student::editStudent(int num)
 		printInfo();
 		cout << "\nНажмите любую клавишу\n";
 		_getch();
+		edit->clear();
 		selectedItem = studMenu->run();
 		switch (selectedItem)
 		{

@@ -6,7 +6,7 @@ enum class markType : char { Fail, Pass, Excellent, Good, Satisfactory, Bad };
 
 struct Subject
 {
-	char name[50];
+	char name[15];
 	markType mark;
 	bool isEmpty;
 };
