@@ -12,7 +12,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	Decrypt();
-	Student a;
+    Student a;
 	a.getShortInfoFromFile();
 	Crypt();
 } 

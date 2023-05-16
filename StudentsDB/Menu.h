@@ -17,7 +17,8 @@ private:
 public:
 
 	Menu(string _upTitle);
-	Menu() : Menu("Главное меню") {
+	Menu() : Menu("Главное меню") 
+	{
 		downTitle = "Выберите пункт из меню (число): ";
 	}
 	void addMenuItem(string _item);

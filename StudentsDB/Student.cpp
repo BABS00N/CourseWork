@@ -100,6 +100,7 @@ void Student::setDepartment()
 	
 	edit->clear(SN.department); edit->setLabel("Введите кафедру: ");
 	str = edit->getData(editType::all, 30).c_str();
+	str.pop_back();
 	strncpy_s(SN.department, str.c_str(), str.size());
 }
 
@@ -107,6 +108,7 @@ void Student::setGroup()
 {
 	edit->clear(SN.group); edit->setLabel("Введите номер группы: ");
 	str = edit->getData(editType::all, 15).c_str();
+	str.pop_back();
 	strncpy_s(SN.group, str.c_str(), str.size());
 }
 
@@ -116,6 +118,7 @@ void Student::setRecordBookNumber()
 	edit->clear(SN.recordBookNumber);
 	edit->setLabel("Введите номер зачетной книжки: ");
 	str = edit->getData(editType::all, 15).c_str();
+	str.pop_back();
 	strncpy_s(SN.recordBookNumber, str.c_str(), str.size());
 }
 
@@ -189,7 +192,6 @@ void Student::setRecordBook(string header)
 			cout << "\nНажмите любую клавишу\n";
 			_getch();
 			system("cls");
-			//setRecordBook(header);
 		}
 		else setSessionByIndex(selectedItem);
 	}
@@ -221,7 +223,6 @@ void Student::setSessionByIndex(int index)
 		{
 			addSubjectByIndex(index, i);
 			system("cls");
-			//setSessionByIndex(index-1);
 		}
 		else if (not(1 < selectedItem and selectedItem <= 10))
 		{
@@ -534,10 +535,12 @@ void Student::deleteStudentFromFile(int num)
 
 void Student::setBirhDateInterval(int& minDate, int& maxDate)
 {
-	cout << "Укажите минимальный год рождения" << endl;
+	//cout << "Укажите минимальный год рождения" << endl;
+	edit->setLabel("Укажите минимальный год рождения");
 	minDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
-	cout << "\nУкажите максимальный год рождения" << endl;
+	//cout << "\nУкажите максимальный год рождения" << endl;
+	edit->setLabel("Укажите максимальный год рождения");
 	maxDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
 	system("cls");
