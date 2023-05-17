@@ -443,9 +443,9 @@ void Student::getShortInfoFromFile()
 		}
 		fclose(binaryFile);
 		cout << i << ") Добавить студента" << endl;
-		cout << i + 1 << ") Сортировать список студентов по году поступления" << endl;
-		cout << i + 2 << ") Сортировать список студентов по интервалу даты рождения" << endl;
-		cout << i + 3 << ") Выход" << endl;
+		//cout << i + 1 << ") Сортировать список студентов по году поступления" << endl;
+		cout << i + 1 << ") Сортировать список студентов по году поступления, с указанием интервала даты рождения" << endl;
+		cout << i + 2 << ") Выход" << endl;
 		
 		edit->setLabel("Введите номер из списка чтобы получить подробную информацию о студенте. ");
 		num = edit->getData(editType::onlyDigit, 0, size+3);
@@ -456,20 +456,12 @@ void Student::getShortInfoFromFile()
 			addStudentToFile();
 			num = -1;
 		}
-		else if (num == i+1)
-		{
-			bubbleSorting();
-			cout << "\nСортировка списка прошла успешна\n";
-			cout << "\nНажмиту любую клавишу\n";
-			_getch();
-			system("cls");
-		}
-		else if (num == i + 2)
+		else if (num == i + 1)
 		{
 			system("cls");
 			sortingStudentsMenu();
 		}
-		else if (num == i + 3)
+		else if (num == i + 2)
 			return;
 		else
 		{
@@ -549,11 +541,9 @@ void Student::deleteStudentFromFile(int num)
 
 void Student::setBirhDateInterval(int& minDate, int& maxDate)
 {
-	//cout << "Укажите минимальный год рождения" << endl;
 	edit->setLabel("Укажите минимальный год рождения");
 	minDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
-	//cout << "\nУкажите максимальный год рождения" << endl;
 	edit->setLabel("Укажите максимальный год рождения");
 	maxDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
@@ -565,7 +555,6 @@ void Student::sortingStudentsMenu()
 	Menu* sortMenu = new Menu("Меню сортировки с интервалом года рождения");
 	sortMenu->addMenuItem("Выход");
 	sortMenu->addMenuItem("Указать интервал года рождения");
-	sortMenu->addMenuItem("Сортировать");
 	int selectedItem = -1;
 	int minDate = 1900, maxDate = 2007;
 	while (selectedItem != 0)
@@ -576,8 +565,6 @@ void Student::sortingStudentsMenu()
 		case 1:
 			system("cls");
 			setBirhDateInterval(minDate,maxDate);
-			break;
-		case 2:
 			system("cls");
 			printSortingStudentsByAdmissionYear(minDate, maxDate);
 			cout << "\nНажмите любую клавишу\n";
