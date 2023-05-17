@@ -2,8 +2,9 @@
 
 enum class Sex : char { male, female };
 
-struct StudentNode
+class StudentNode
 {
+public:
 	char surname[30];
 	char name[30];
 	char patronymic[30];
