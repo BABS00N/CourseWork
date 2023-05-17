@@ -443,7 +443,6 @@ void Student::getShortInfoFromFile()
 		}
 		fclose(binaryFile);
 		cout << i << ") Добавить студента" << endl;
-		//cout << i + 1 << ") Сортировать список студентов по году поступления" << endl;
 		cout << i + 1 << ") Сортировать список студентов по году поступления, с указанием интервала даты рождения" << endl;
 		cout << i + 2 << ") Выход" << endl;
 		
@@ -564,6 +563,7 @@ void Student::sortingStudentsMenu()
 		{
 		case 1:
 			system("cls");
+			bubbleSorting();
 			setBirhDateInterval(minDate,maxDate);
 			system("cls");
 			printSortingStudentsByAdmissionYear(minDate, maxDate);
@@ -607,7 +607,7 @@ void Student::bubbleSorting()
 
 	for (int i = 0; i < countItems; i++) {
 		for (int j = 0; j < countItems - 1; j++) {
-			if (studentsList[j].admissionYear < studentsList[j + 1].admissionYear) {
+			if (studentsList[j].admissionYear > studentsList[j + 1].admissionYear) {
 				StudentNode tmp = studentsList[j];
 				studentsList[j] = studentsList[j + 1];
 				studentsList[j + 1] = tmp;
