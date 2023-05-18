@@ -555,8 +555,7 @@ void Student::setFilter(int& minDate, int& maxDate, string& groupNum)
 
 void Student::sortingStudents()
 {
-	int selectedItem = -1;
-	int minDate = 1900, maxDate = 2007;
+	int minDate, maxDate;
 	string groupNum = "";
 	
 	system("cls");
