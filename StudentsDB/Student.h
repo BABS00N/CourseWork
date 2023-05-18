@@ -53,8 +53,8 @@ public:
 	void writeToFileStudentData(int num);
 	void deleteStudentFromFile(int num);
 
-	void setBirhDateInterval(int& minDate, int& maxDate);
-	void sortingStudentsMenu();
-	void printSortingStudentsByAdmissionYear(int minDate, int maxDate);
+	void setFilter(int& minDate, int& maxDate, string& groupNum);
+	void sortingStudents();
+	void printSortingStudentsByAdmissionYear(int minDate, int maxDate, string groupNum);
 	void bubbleSorting();
 };

@@ -458,7 +458,7 @@ void Student::getShortInfoFromFile()
 		else if (num == i + 1)
 		{
 			system("cls");
-			sortingStudentsMenu();
+			sortingStudents();
 		}
 		else if (num == i + 2)
 			return;
@@ -538,8 +538,12 @@ void Student::deleteStudentFromFile(int num)
 	rename("tmp.txt", fileName.c_str());
 }
 
-void Student::setBirhDateInterval(int& minDate, int& maxDate)
+void Student::setFilter(int& minDate, int& maxDate, string& groupNum)
 {
+	edit->setLabel("Введите номер группы: ");
+	groupNum = edit->getData(editType::all, 15).c_str();
+	groupNum.pop_back();
+	edit->clear();
 	edit->setLabel("Укажите минимальный год рождения");
 	minDate = edit->getData(editType::onlyDigit, 1900, 2007);
 	edit->clear();
@@ -549,35 +553,23 @@ void Student::setBirhDateInterval(int& minDate, int& maxDate)
 	system("cls");
 }
 
-void Student::sortingStudentsMenu()
+void Student::sortingStudents()
 {
-	Menu* sortMenu = new Menu("Меню сортировки с интервалом года рождения");
-	sortMenu->addMenuItem("Выход");
-	sortMenu->addMenuItem("Указать интервал года рождения");
 	int selectedItem = -1;
 	int minDate = 1900, maxDate = 2007;
-	while (selectedItem != 0)
-	{
-		selectedItem = sortMenu->run();
-		switch (selectedItem)
-		{
-		case 1:
-			system("cls");
-			bubbleSorting();
-			setBirhDateInterval(minDate,maxDate);
-			system("cls");
-			printSortingStudentsByAdmissionYear(minDate, maxDate);
-			cout << "\nНажмите любую клавишу\n";
-			_getch();
-			system("cls");
-			break;
-		default:
-			break;
-		}
-	}
+	string groupNum = "";
+	
+	system("cls");
+	bubbleSorting();
+	setFilter(minDate, maxDate, groupNum);
+	system("cls");
+	printSortingStudentsByAdmissionYear(minDate, maxDate, groupNum);
+	cout << "\nНажмите любую клавишу\n";
+	_getch();
+	system("cls");
 }
 
-void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate)
+void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate, string groupNum)
 {
 	int countItems = countRecords();
 	cout << "Список студентов в интервале года рождения ("<<minDate<<";"<<maxDate<<")"<<endl;
@@ -587,7 +579,7 @@ void Student::printSortingStudentsByAdmissionYear(int minDate, int maxDate)
 		string strDate = SN.birthDate;
 		strDate = strDate.substr(6, 4);
 		int date = atoi(strDate.c_str());
-		if (minDate <= date and date <= maxDate)
+		if (minDate <= date and date <= maxDate and SN.group == groupNum)
 		{
 			cout << i << ") " << SN.surname << " " << SN.name 
 				<< " " << SN.patronymic << " " << SN.group << endl;
